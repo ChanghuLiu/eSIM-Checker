@@ -1,0 +1,18 @@
+*.iml
+.gradle
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Release signing material must stay local.
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+*.aab
+*.apk

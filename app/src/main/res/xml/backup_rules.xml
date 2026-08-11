@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <exclude
+        domain="sharedpref"
+        path="manual_esim_verification.xml" />
+    <exclude
+        domain="sharedpref"
+        path="travel_esim_purchase_check.xml" />
+</full-backup-content>

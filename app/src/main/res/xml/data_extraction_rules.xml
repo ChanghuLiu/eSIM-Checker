@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude
+            domain="sharedpref"
+            path="manual_esim_verification.xml" />
+        <exclude
+            domain="sharedpref"
+            path="travel_esim_purchase_check.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude
+            domain="sharedpref"
+            path="manual_esim_verification.xml" />
+        <exclude
+            domain="sharedpref"
+            path="travel_esim_purchase_check.xml" />
+    </device-transfer>
+</data-extraction-rules>

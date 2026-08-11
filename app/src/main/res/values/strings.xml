@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eSIM Checker</string>
+    <string name="unknown_value">Unknown</string>
+
+    <string name="result_ready">Ready for eSIM</string>
+    <string name="result_partially_ready">eSIM Support Needs Verification</string>
+    <string name="esim_not_detected">eSIM Not Detected</string>
+    <string name="esim_supported">eSIM Supported</string>
+    <string name="esim_support_uncertain">eSIM Support Uncertain</string>
+    <string name="status_description_ready">Android reports eSIM hardware and an enabled eSIM service on this device.</string>
+    <string name="status_description_partially_ready">eSIM hardware is detected, but the Android eSIM service is currently unavailable. Verify the device region, firmware, and carrier configuration.</string>
+    <string name="status_description_not_ready">This device does not report Android eSIM hardware support.</string>
+    <string name="status_symbol_ready" translatable="false">✓</string>
+    <string name="status_symbol_partially_ready" translatable="false">?</string>
+    <string name="status_symbol_not_ready" translatable="false">×</string>
+
+    <string name="device_section">Device</string>
+    <string name="manufacturer_label">Manufacturer</string>
+    <string name="device_model_label">Device model</string>
+    <string name="android_version_label">Android version</string>
+    <string name="device_display_name" translatable="false">%1$s %2$s</string>
+    <string name="compatibility_section">Compatibility</string>
+    <string name="esim_hardware_label">eSIM Hardware</string>
+    <string name="esim_service_label">eSIM Service</string>
+    <string name="android_esim_api_label">Android eSIM API</string>
+    <string name="supported">Supported</string>
+    <string name="unsupported">Unsupported</string>
+    <string name="detected">Detected</string>
+    <string name="not_detected">Not detected</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
+
+    <string name="esim_readiness_section">eSIM Readiness</string>
+    <string name="readiness_label_ready">READY</string>
+    <string name="readiness_label_needs_verification">NEEDS VERIFICATION</string>
+    <string name="readiness_label_not_detected">NOT DETECTED</string>
+    <string name="euicc_manager_label" translatable="false">EuiccManager</string>
+
+    <string name="verify_in_settings">Verify in Settings</string>
+    <string name="verify_in_settings_description">Android reports eSIM support. Open your phone\'s eSIM settings to confirm that Add eSIM or a similar option is available.</string>
+    <string name="manual_verification_recommended">Manual verification recommended</string>
+    <string name="manual_verification_recommended_description">Android reports partial eSIM capability. Check the system SIM settings for Add eSIM, Download SIM, or Add mobile plan.</string>
+    <string name="one_more_check">One more check</string>
+    <string name="one_more_check_description">Android does not report eSIM hardware support. You can still check your phone\'s SIM settings because some regional or manufacturer configurations may differ.</string>
+    <string name="open_esim_settings">Open eSIM Settings</string>
+    <string name="open_sim_settings">Open SIM Settings</string>
+    <string name="settings_unavailable">SIM settings could not be opened on this device.</string>
+
+    <string name="did_you_see_esim_option">Did you see an eSIM option?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="not_sure">Not sure</string>
+    <string name="not_checked">Not checked</string>
+    <string name="esim_option_found">eSIM option found in system settings</string>
+    <string name="esim_option_found_description">This is a strong additional sign that your phone supports eSIM. Carrier and provider compatibility should still be verified.</string>
+    <string name="no_esim_option_found">No eSIM option found</string>
+    <string name="no_esim_option_found_description">The option may be unavailable because of device variant, firmware, carrier configuration, or lack of eSIM support.</string>
+    <string name="not_sure_instructions">Look for menu names such as:\n• Add eSIM\n• SIM Manager\n• Download SIM\n• Add mobile plan\n• Add cellular plan</string>
+    <string name="manual_observation_note">This is a user-confirmed observation and does not change the Android-detected result.</string>
+
+    <string name="travel_esim_check">Travel eSIM Check</string>
+    <string name="travel_esim_check_subtitle">Check the important things before buying a travel eSIM.</string>
+    <string name="purchase_step_title">Step %1$d — %2$s</string>
+    <string name="step_device_esim_support">Device eSIM support</string>
+    <string name="purchase_status_pass">PASS</string>
+    <string name="automatic_android_detection_note">Checked automatically using capabilities reported by Android.</string>
+    <string name="step_settings_option">eSIM option in Settings</string>
+    <string name="settings_option_question">Did you see Add eSIM / Download SIM / Add mobile plan?</string>
+    <string name="step_carrier_unlock">Carrier unlock</string>
+    <string name="carrier_unlock_question">Is your phone carrier unlocked?</string>
+    <string name="carrier_locked_warning">Carrier-locked phones may reject travel eSIMs. Check with your mobile carrier before purchasing.</string>
+    <string name="carrier_lock_manual_note">Carrier lock status is answered by you and is not detected by this app.</string>
+    <string name="step_provider_compatibility">Provider compatibility</string>
+    <string name="provider_compatibility_question">Does your eSIM provider support your exact phone model?</string>
+    <string name="exact_model">Exact model</string>
+    <string name="copy_exact_model">Copy Exact Model</string>
+    <string name="exact_model_clipboard_label">Exact phone model</string>
+    <string name="exact_model_copied">Exact model copied</string>
+    <string name="regional_model_explanation">Some regional versions of the same phone model may have different eSIM support.</string>
+    <string name="ready_to_buy">READY TO BUY</string>
+    <string name="ready_to_buy_description">Your checks look good for purchasing an eSIM.</string>
+    <string name="compatibility_not_guaranteed">Compatibility cannot be guaranteed. Your eSIM provider makes the final compatibility determination.</string>
+    <string name="verify_before_buying">VERIFY BEFORE BUYING</string>
+    <string name="verify_before_buying_description">Complete the remaining checks before purchasing an eSIM.</string>
+    <string name="do_not_buy_yet">DO NOT BUY YET</string>
+    <string name="do_not_buy_yet_description">One or more checks indicate that this eSIM may not work on your phone.</string>
+    <string name="travel_purchase_check">Travel eSIM Purchase Check</string>
+    <string name="summary_device_support">Device support</string>
+    <string name="summary_system_esim_option">System eSIM option</string>
+    <string name="summary_carrier_unlocked">Carrier unlocked</string>
+    <string name="summary_provider_compatibility">Provider compatibility</string>
+    <string name="overall_label">Overall</string>
+    <string name="copy_purchase_check">Copy Purchase Check</string>
+    <string name="purchase_check_clipboard_label">Travel eSIM purchase check</string>
+    <string name="purchase_check_copied">Purchase check copied</string>
+    <string name="purchase_check_local_note">All answers and processing stay on this device.</string>
+    <string name="system_evidence">System Evidence</string>
+    <string name="automatically_detected">Automatically detected</string>
+    <string name="user_verified">User verified</string>
+    <string name="exact_device_model">Exact device model</string>
+    <string name="evidence_settings_option">eSIM option found in Settings</string>
+    <string name="evidence_carrier_unlocked">Carrier unlocked</string>
+    <string name="evidence_provider_exact_model">Provider supports exact model</string>
+    <string name="still_needs_verification">Still needs verification</string>
+    <string name="missing_settings_option">eSIM option in Settings</string>
+    <string name="missing_carrier_unlock_status">Carrier unlock status</string>
+    <string name="missing_provider_exact_model_support">Provider support for your exact model</string>
+    <string name="checks_completed">Checks completed</string>
+    <string name="start_new_check">Start a New Check</string>
+    <string name="start_new_check_confirmation">This clears your Settings verification, carrier unlock answer, and provider compatibility answer. Your language preference will be kept.</string>
+    <string name="start_new_check_confirm">Start New Check</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_check_started">New check started</string>
+    <string name="bullet_item_format" translatable="false">• %1$s</string>
+    <string name="copy_purchase_check_template">eSIM Compatibility Report\n\nDevice:\n%1$s\n\nManufacturer:\n%2$s\n\nExact model:\n%3$s\n\nDevice codename:\n%4$s\n\nAndroid:\n%5$s\n\nAutomatic checks:\neSIM hardware: %6$s\neSIM service: %7$s\nAndroid eSIM API: %8$s\n\nManual checks:\neSIM option in Settings: %9$s\nCarrier unlocked: %10$s\nProvider supports exact model: %11$s\n\nOverall:\n%12$s\n\nGenerated locally by eSIM Checker.\n\nCompatibility is not guaranteed by eSIM Checker.\nFinal compatibility depends on the carrier, regional device variant,\nfirmware, and eSIM provider.</string>
+
+    <string name="before_you_buy">Before You Buy</string>
+    <string name="check_android_support">Android eSIM support</string>
+    <string name="check_android_support_unavailable">Android eSIM support unavailable</string>
+    <string name="check_service_available">eSIM service available</string>
+    <string name="check_service_unavailable">eSIM service unavailable</string>
+    <string name="carrier_unlock_provider_check">Carrier unlock and provider compatibility must be checked separately.</string>
+    <string name="status_symbol_warning" translatable="false">⚠</string>
+
+    <string name="check_again">Check Again</string>
+    <string name="copy_full_report">Copy Full Report</string>
+    <string name="full_report_copied">Full report copied</string>
+    <string name="clipboard_label">eSIM Checker full report</string>
+    <string name="how_to_add_esim">How to Add an eSIM</string>
+    <string name="compatibility_disclaimer">Compatibility results are based on information reported by Android. Carrier restrictions, regional device variants, and firmware may affect actual eSIM availability.</string>
+    <string name="privacy_footer">Check completed locally. No device data is uploaded.</string>
+    <string name="debug_status" translatable="false">euiccFeature=%1$b | manager=%2$b | enabled=%3$b</string>
+
+    <string name="about">About</string>
+    <string name="version_format">Version %1$s</string>
+    <string name="about_description">Check whether your Android device reports eSIM support before buying an eSIM.</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_local_checks">eSIM Checker performs compatibility checks locally on your device.</string>
+    <string name="privacy_no_collection">The app does not collect, upload, sell, or share personal data.</string>
+    <string name="privacy_local_device_data">Device manufacturer, model, Android version, and eSIM capability information are processed locally only.</string>
+    <string name="privacy_no_account">No account is required.</string>
+    <string name="privacy_no_backend">No backend server is used.</string>
+    <string name="privacy_no_ads_analytics">No advertising or analytics SDK is included.</string>
+    <string name="privacy_no_guarantee">The app does not guarantee compatibility with a specific carrier or eSIM provider.</string>
+    <string name="contact_label">Contact:</string>
+    <string name="contact_email" translatable="false">artbyte@126.com</string>
+
+    <string name="language_section">Language</string>
+    <string name="system_default">System default</string>
+    <string name="language_name_english" translatable="false">English</string>
+    <string name="language_name_spanish" translatable="false">Español</string>
+    <string name="language_name_portuguese" translatable="false">Português</string>
+    <string name="language_name_arabic" translatable="false">العربية</string>
+    <string name="language_name_turkish" translatable="false">Türkçe</string>
+    <string name="language_name_indonesian" translatable="false">Bahasa Indonesia</string>
+    <string name="language_name_french" translatable="false">Français</string>
+    <string name="language_name_simplified_chinese" translatable="false">简体中文</string>
+
+    <string name="back">Back</string>
+    <string name="how_to_intro">Use the steps below after purchasing an eSIM plan.</string>
+    <string name="instruction_open_settings">Open Settings.</string>
+    <string name="instruction_open_network">Open Connections, Network &amp; Internet, or SIM Manager.</string>
+    <string name="instruction_look_for_add">Look for Add eSIM, Download SIM, or Add mobile plan.</string>
+    <string name="instruction_scan_qr">Scan the QR code provided by your eSIM provider.</string>
+    <string name="menu_names_vary">Menu names vary by phone manufacturer.</string>
+    <string name="instruction_step_number" translatable="false">%1$d</string>
+
+    <string name="copy_full_report_template">Manufacturer: %1$s\nModel: %2$s\nAndroid version: %3$s\neSIM Hardware: %4$s\neSIM Service: %5$s\nAndroid eSIM API: %6$s\nAndroid detection: %7$s\nSystem settings verification: %8$s</string>
+</resources>
