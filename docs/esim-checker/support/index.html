@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Support and common questions for the eSIM Checker Android app.">
+  <title>Support - eSIM Checker</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #f5faf8;
+      --surface: #ffffff;
+      --text: #17201d;
+      --muted: #52615c;
+      --accent: #006c51;
+      --accent-soft: #d2f5e8;
+      --border: #d9e3df;
+      --warning: #8a3d00;
+      --warning-soft: #fff0dd;
+      --shadow: 0 18px 48px rgb(18 54 43 / 8%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(100% - 32px, 820px);
+      margin-inline: auto;
+      padding-block: 48px 64px;
+    }
+
+    article {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    header {
+      padding: 40px clamp(24px, 6vw, 56px) 32px;
+      background: linear-gradient(145deg, var(--accent-soft), var(--surface));
+      border-block-end: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 7vw, 3.25rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    .intro {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .content {
+      padding: 32px clamp(24px, 6vw, 56px) 48px;
+    }
+
+    .email-card {
+      margin-block: 0 38px;
+      padding: 18px 20px;
+      background: var(--accent-soft);
+      border-radius: 16px;
+    }
+
+    .email-card p {
+      margin: 0;
+    }
+
+    .email-card .label {
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .email-card a {
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    .faq {
+      margin: 0;
+    }
+
+    .faq > div {
+      padding-block: 25px;
+      border-block-start: 1px solid var(--border);
+    }
+
+    .faq > div:first-child {
+      padding-block-start: 0;
+      border-block-start: 0;
+    }
+
+    .faq dt {
+      margin-block-end: 8px;
+      font-size: 1.1rem;
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    .faq dd {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .report {
+      margin-block-start: 10px;
+      padding-block-start: 30px;
+      border-block-start: 1px solid var(--border);
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul {
+      margin: 10px 0 22px;
+      padding-inline-start: 1.35rem;
+    }
+
+    li + li {
+      margin-block-start: 4px;
+    }
+
+    .warning {
+      margin-block-start: 22px;
+      padding: 16px 18px;
+      color: var(--warning);
+      background: var(--warning-soft);
+      border: 1px solid color-mix(in srgb, var(--warning) 30%, transparent);
+      border-radius: 14px;
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--accent);
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 520px) {
+      main {
+        width: 100%;
+        padding-block: 0;
+      }
+
+      article {
+        border-inline: 0;
+        border-radius: 0;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #09110e;
+        --surface: #111a17;
+        --text: #e5eee9;
+        --muted: #aebdb7;
+        --accent: #78d9b9;
+        --accent-soft: #173b31;
+        --border: #2a3a35;
+        --warning: #ffb77c;
+        --warning-soft: #442400;
+        --shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <header>
+        <p class="eyebrow">eSIM Checker</p>
+        <h1>eSIM Checker Support</h1>
+        <p class="intro">Need help with eSIM Checker?</p>
+      </header>
+
+      <div class="content">
+        <div class="email-card">
+          <p class="label">Email:</p>
+          <p><a href="mailto:artbyte@126.com">artbyte@126.com</a></p>
+        </div>
+
+        <section aria-labelledby="common-questions">
+          <h2 id="common-questions">Common Questions</h2>
+          <dl class="faq">
+            <div>
+              <dt>Why does the app say "eSIM Not Detected"?</dt>
+              <dd>
+                Android does not report eSIM hardware support on your device.
+                Regional variants, firmware, carrier configuration, or device type
+                may affect the result.
+              </dd>
+            </div>
+
+            <div>
+              <dt>Why does the app say "Needs Verification"?</dt>
+              <dd>
+                Android reports some eSIM capability, but the eSIM service or another
+                check still requires confirmation.
+              </dd>
+            </div>
+
+            <div>
+              <dt>Can eSIM Checker tell whether my phone is carrier unlocked?</dt>
+              <dd>
+                No. eSIM Checker does not claim to automatically detect carrier lock status.
+                Please confirm this with your mobile carrier.
+              </dd>
+            </div>
+
+            <div>
+              <dt>Does eSIM Checker guarantee that an eSIM will work?</dt>
+              <dd>
+                No. Final compatibility depends on your exact device model, regional
+                variant, carrier, firmware, and eSIM provider.
+              </dd>
+            </div>
+
+            <div>
+              <dt>Does the app upload my device information?</dt>
+              <dd>No. Compatibility checking is performed locally.</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="report" aria-labelledby="report-problem">
+          <h2 id="report-problem">How do I report a problem?</h2>
+          <p>Email:</p>
+          <p><a href="mailto:artbyte@126.com">artbyte@126.com</a></p>
+          <p>Please include:</p>
+          <ul>
+            <li>Phone manufacturer</li>
+            <li>Exact model</li>
+            <li>Android version</li>
+            <li>eSIM Checker result</li>
+          </ul>
+          <p class="warning">
+            Do not send IMEI, EID, phone numbers, or other sensitive information.
+          </p>
+        </section>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
