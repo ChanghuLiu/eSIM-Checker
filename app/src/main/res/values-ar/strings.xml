@@ -10,6 +10,7 @@
     <string name="status_description_ready">يفيد Android بوجود مكونات eSIM وخدمة eSIM مفعّلة على هذا الجهاز.</string>
     <string name="status_description_partially_ready">تم اكتشاف مكونات eSIM، لكن خدمة eSIM في Android غير متاحة حاليًا. تحقق من منطقة الجهاز والبرنامج الثابت وإعدادات شركة الاتصالات.</string>
     <string name="status_description_not_ready">لا يفيد هذا الجهاز بوجود دعم لمكونات eSIM في Android.</string>
+    <string name="status_description_android_api_unavailable">لا يستطيع Android 8.1 الإبلاغ تلقائيًا عن إمكانية eSIM من خلال واجهة eSIM المدعومة في Android. تحقق يدويًا من إعدادات SIM والطراز الدقيق لجهازك.</string>
     <string name="device_section">الجهاز</string>
     <string name="manufacturer_label">الشركة المصنّعة</string>
     <string name="device_model_label">طراز الجهاز</string>

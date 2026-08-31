@@ -5,6 +5,16 @@ import org.junit.Test
 
 class EsimResultClassifierTest {
     @Test
+    fun `api 27 exposes no Android eSIM detection signals`() {
+        val signals = EsimCompatibilityPlatform.legacyApi27Signals()
+
+        assertEquals(false, signals.hasEuiccFeature)
+        assertEquals(false, signals.euiccManagerAvailable)
+        assertEquals(false, signals.euiccEnabled)
+        assertEquals(false, signals.androidEsimApiAvailable)
+    }
+
+    @Test
     fun `feature and enabled manager are ready`() {
         val result = EsimResultClassifier.classify(
             hasEuiccFeature = true,

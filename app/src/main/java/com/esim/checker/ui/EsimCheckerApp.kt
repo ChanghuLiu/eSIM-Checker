@@ -279,8 +279,8 @@ private fun CompatibilityScreen(
     onShowInstructions: () -> Unit,
     onShowAbout: () -> Unit,
 ) {
-    val status = statusContent(result.resultStatus)
-    val statusColors = statusColors(result.resultStatus)
+    val status = statusContent(result)
+    val statusColors = statusColors(result)
     val context = LocalContext.current
     val clipboardLabel = stringResource(R.string.clipboard_label)
     val copiedMessage = stringResource(R.string.full_report_copied)
@@ -355,7 +355,7 @@ private fun CompatibilityScreen(
             Spacer(modifier = Modifier.size(12.dp))
 
             SettingsVerificationActionCard(
-                resultStatus = result.resultStatus,
+                result = result,
                 onOpenSettings = onOpenSettings,
             )
 
@@ -524,10 +524,10 @@ private fun CompatibilityCard(result: EsimCompatibilityResult) {
 
 @Composable
 private fun SettingsVerificationActionCard(
-    resultStatus: EsimResultStatus,
+    result: EsimCompatibilityResult,
     onOpenSettings: () -> Unit,
 ) {
-    val content = settingsVerificationContent(resultStatus)
+    val content = settingsVerificationContent(result)
 
     InfoCard(title = stringResource(content.titleRes)) {
         Text(
@@ -1849,9 +1849,20 @@ private fun InstructionStep(
     }
 }
 
-private fun statusContent(status: EsimResultStatus): StatusContent = when (status) {
+private fun statusContent(result: EsimCompatibilityResult): StatusContent {
+    if (!result.androidEsimApiAvailable) {
+        return StatusContent(
+            titleRes = R.string.esim_support_uncertain,
+            descriptionRes = R.string.status_description_android_api_unavailable,
+            symbolRes = R.string.status_symbol_partially_ready,
+            symbolDescriptionRes = R.string.esim_support_uncertain,
+            readinessLabelRes = R.string.readiness_label_needs_verification,
+        )
+    }
+
+    return when (result.resultStatus) {
     EsimResultStatus.READY -> StatusContent(
-        titleRes = status.labelRes(),
+        titleRes = result.resultStatus.labelRes(),
         descriptionRes = R.string.status_description_ready,
         symbolRes = R.string.status_symbol_ready,
         symbolDescriptionRes = R.string.esim_supported,
@@ -1859,7 +1870,7 @@ private fun statusContent(status: EsimResultStatus): StatusContent = when (statu
     )
 
     EsimResultStatus.PARTIALLY_READY -> StatusContent(
-        titleRes = status.labelRes(),
+        titleRes = result.resultStatus.labelRes(),
         descriptionRes = R.string.status_description_partially_ready,
         symbolRes = R.string.status_symbol_partially_ready,
         symbolDescriptionRes = R.string.esim_support_uncertain,
@@ -1867,17 +1878,27 @@ private fun statusContent(status: EsimResultStatus): StatusContent = when (statu
     )
 
     EsimResultStatus.NOT_READY -> StatusContent(
-        titleRes = status.labelRes(),
+        titleRes = result.resultStatus.labelRes(),
         descriptionRes = R.string.status_description_not_ready,
         symbolRes = R.string.status_symbol_not_ready,
         symbolDescriptionRes = R.string.esim_not_detected,
         readinessLabelRes = R.string.readiness_label_not_detected,
     )
+    }
 }
 
 private fun settingsVerificationContent(
-    status: EsimResultStatus,
-): SettingsVerificationContent = when (status) {
+    result: EsimCompatibilityResult,
+): SettingsVerificationContent {
+    if (!result.androidEsimApiAvailable) {
+        return SettingsVerificationContent(
+            titleRes = R.string.manual_verification_recommended,
+            descriptionRes = R.string.status_description_android_api_unavailable,
+            buttonRes = R.string.open_sim_settings,
+        )
+    }
+
+    return when (result.resultStatus) {
     EsimResultStatus.READY -> SettingsVerificationContent(
         titleRes = R.string.verify_in_settings,
         descriptionRes = R.string.verify_in_settings_description,
@@ -1895,10 +1916,19 @@ private fun settingsVerificationContent(
         descriptionRes = R.string.one_more_check_description,
         buttonRes = R.string.open_sim_settings,
     )
+    }
 }
 
 @Composable
-private fun statusColors(status: EsimResultStatus): StatusColors = when (status) {
+private fun statusColors(result: EsimCompatibilityResult): StatusColors {
+    if (!result.androidEsimApiAvailable) {
+        return StatusColors(
+            foreground = MaterialTheme.colorScheme.onTertiaryContainer,
+            background = MaterialTheme.colorScheme.tertiaryContainer,
+        )
+    }
+
+    return when (result.resultStatus) {
     EsimResultStatus.READY -> StatusColors(
         foreground = MaterialTheme.colorScheme.onPrimaryContainer,
         background = MaterialTheme.colorScheme.primaryContainer,
@@ -1913,6 +1943,7 @@ private fun statusColors(status: EsimResultStatus): StatusColors = when (status)
         foreground = MaterialTheme.colorScheme.onErrorContainer,
         background = MaterialTheme.colorScheme.errorContainer,
     )
+    }
 }
 
 @Composable

@@ -10,6 +10,7 @@
     <string name="status_description_ready">Android melaporkan perangkat ini memiliki perangkat keras eSIM dan layanan eSIM yang aktif.</string>
     <string name="status_description_partially_ready">Perangkat keras eSIM terdeteksi, tetapi layanan eSIM Android saat ini tidak tersedia. Periksa wilayah perangkat, firmware, dan konfigurasi operator.</string>
     <string name="status_description_not_ready">Perangkat ini tidak melaporkan dukungan perangkat keras eSIM Android.</string>
+    <string name="status_description_android_api_unavailable">Android 8.1 tidak dapat melaporkan kemampuan eSIM secara otomatis melalui API eSIM Android yang didukung. Periksa setelan SIM dan model perangkat Anda secara manual.</string>
     <string name="device_section">Perangkat</string>
     <string name="manufacturer_label">Produsen</string>
     <string name="device_model_label">Model perangkat</string>

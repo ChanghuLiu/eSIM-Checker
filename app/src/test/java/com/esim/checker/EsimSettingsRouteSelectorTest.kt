@@ -5,6 +5,17 @@ import org.junit.Test
 
 class EsimSettingsRouteSelectorTest {
     @Test
+    fun `api 27 never selects embedded subscriptions route`() {
+        val route = EsimSettingsRouteSelector.selectForSdk(
+            sdkInt = 27,
+            embeddedSubscriptionsAvailable = true,
+            wirelessSettingsAvailable = true,
+        )
+
+        assertEquals(EsimSettingsRoute.WIRELESS_SETTINGS, route)
+    }
+
+    @Test
     fun `dedicated embedded subscriptions route is preferred`() {
         val route = EsimSettingsRouteSelector.select(
             embeddedSubscriptionsAvailable = true,

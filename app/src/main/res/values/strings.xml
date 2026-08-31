@@ -11,6 +11,7 @@
     <string name="status_description_ready">Android reports eSIM hardware and an enabled eSIM service on this device.</string>
     <string name="status_description_partially_ready">eSIM hardware is detected, but the Android eSIM service is currently unavailable. Verify the device region, firmware, and carrier configuration.</string>
     <string name="status_description_not_ready">This device does not report Android eSIM hardware support.</string>
+    <string name="status_description_android_api_unavailable">Android 8.1 cannot automatically report eSIM capability through the supported Android eSIM API. Check SIM settings and your exact device model manually.</string>
     <string name="status_symbol_ready" translatable="false">✓</string>
     <string name="status_symbol_partially_ready" translatable="false">?</string>
     <string name="status_symbol_not_ready" translatable="false">×</string>

@@ -10,6 +10,7 @@
     <string name="status_description_ready">Android, bu cihazda eSIM donanımı ve etkin bir eSIM hizmeti olduğunu bildiriyor.</string>
     <string name="status_description_partially_ready">eSIM donanımı algılandı ancak Android eSIM hizmeti şu anda kullanılamıyor. Cihaz bölgesini, cihaz yazılımını ve operatör yapılandırmasını doğrulayın.</string>
     <string name="status_description_not_ready">Bu cihaz Android eSIM donanım desteği bildirmiyor.</string>
+    <string name="status_description_android_api_unavailable">Android 8.1, desteklenen Android eSIM API’si üzerinden eSIM özelliğini otomatik olarak bildiremez. SIM ayarlarını ve cihazınızın tam modelini manuel olarak kontrol edin.</string>
     <string name="device_section">Cihaz</string>
     <string name="manufacturer_label">Üretici</string>
     <string name="device_model_label">Cihaz modeli</string>

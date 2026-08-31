@@ -10,6 +10,7 @@
     <string name="status_description_ready">Android сообщает о наличии оборудования eSIM и включённой службы eSIM на этом устройстве.</string>
     <string name="status_description_partially_ready">Оборудование eSIM обнаружено, но служба eSIM Android сейчас недоступна. Проверьте регион устройства, прошивку и настройки оператора.</string>
     <string name="status_description_not_ready">Это устройство не сообщает о поддержке оборудования eSIM в Android.</string>
+    <string name="status_description_android_api_unavailable">Android 8.1 не может автоматически сообщить о поддержке eSIM через поддерживаемый API eSIM Android. Проверьте настройки SIM и точную модель устройства вручную.</string>
     <string name="device_section">Устройство</string>
     <string name="manufacturer_label">Производитель</string>
     <string name="device_model_label">Модель устройства</string>

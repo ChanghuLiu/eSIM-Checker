@@ -4,8 +4,9 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.provider.Settings
-import android.telephony.euicc.EuiccManager
+import androidx.annotation.RequiresApi
 
 enum class EsimSettingsRoute {
     EMBEDDED_SUBSCRIPTIONS,
@@ -28,6 +29,16 @@ object EsimSettingsRouteSelector {
         wirelessSettingsAvailable -> EsimSettingsRoute.WIRELESS_SETTINGS
         else -> EsimSettingsRoute.UNAVAILABLE
     }
+
+    fun selectForSdk(
+        sdkInt: Int,
+        embeddedSubscriptionsAvailable: Boolean,
+        wirelessSettingsAvailable: Boolean,
+    ): EsimSettingsRoute = select(
+        embeddedSubscriptionsAvailable = sdkInt >= Build.VERSION_CODES.P &&
+            embeddedSubscriptionsAvailable,
+        wirelessSettingsAvailable = wirelessSettingsAvailable,
+    )
 }
 
 object EsimSettingsNavigator {
@@ -35,15 +46,15 @@ object EsimSettingsNavigator {
         context: Context,
         launch: (Intent) -> Unit,
     ): EsimSettingsLaunchResult {
-        val embeddedSubscriptionsIntent = Intent(
-            EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS,
-        )
         val wirelessSettingsIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
-        val embeddedSubscriptionsAvailable = !context.forceDebugWirelessSettings() &&
-            canHandle(
-                context = context,
-                intent = embeddedSubscriptionsIntent,
-            )
+        val embeddedSubscriptionsIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            Api28SettingsIntent.create()
+        } else {
+            null
+        }
+        val embeddedSubscriptionsAvailable = embeddedSubscriptionsIntent != null &&
+            !context.forceDebugWirelessSettings() &&
+            canHandle(context = context, intent = embeddedSubscriptionsIntent)
         val wirelessSettingsAvailable = canHandle(
             context = context,
             intent = wirelessSettingsIntent,
@@ -55,6 +66,7 @@ object EsimSettingsNavigator {
         )
 
         if (initialRoute == EsimSettingsRoute.EMBEDDED_SUBSCRIPTIONS &&
+            embeddedSubscriptionsIntent != null &&
             launchSafely(embeddedSubscriptionsIntent, launch)
         ) {
             return EsimSettingsLaunchResult(
@@ -100,4 +112,11 @@ object EsimSettingsNavigator {
     } catch (_: RuntimeException) {
         false
     }
+}
+
+@RequiresApi(Build.VERSION_CODES.P)
+private object Api28SettingsIntent {
+    fun create(): Intent = Intent(
+        android.telephony.euicc.EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS,
+    )
 }

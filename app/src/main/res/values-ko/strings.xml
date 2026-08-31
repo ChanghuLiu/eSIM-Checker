@@ -10,6 +10,7 @@
     <string name="status_description_ready">Android에서 이 기기의 eSIM 하드웨어와 활성화된 eSIM 서비스를 감지했습니다.</string>
     <string name="status_description_partially_ready">eSIM 하드웨어는 감지되었지만 Android eSIM 서비스를 현재 사용할 수 없습니다. 기기 지역, 펌웨어 및 이동통신사 설정을 확인하세요.</string>
     <string name="status_description_not_ready">이 기기에서는 Android eSIM 하드웨어 지원이 감지되지 않습니다.</string>
+    <string name="status_description_android_api_unavailable">Android 8.1에서는 지원되는 Android eSIM API를 통해 eSIM 지원 여부를 자동으로 알릴 수 없습니다. SIM 설정과 기기의 정확한 모델을 직접 확인하세요.</string>
     <string name="device_section">기기</string>
     <string name="manufacturer_label">제조업체</string>
     <string name="device_model_label">기기 모델</string>

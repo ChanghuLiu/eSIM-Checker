@@ -10,6 +10,7 @@
     <string name="status_description_ready">Android 报告此设备具有 eSIM 硬件，并且 eSIM 服务已启用。</string>
     <string name="status_description_partially_ready">已检测到 eSIM 硬件，但 Android eSIM 服务当前不可用。请核实设备地区、固件和运营商配置。</string>
     <string name="status_description_not_ready">此设备未报告支持 Android eSIM 硬件。</string>
+    <string name="status_description_android_api_unavailable">Android 8.1 无法通过受支持的 Android eSIM API 自动报告 eSIM 功能。请手动检查 SIM 设置和设备的确切型号。</string>
     <string name="device_section">设备</string>
     <string name="manufacturer_label">制造商</string>
     <string name="device_model_label">设备型号</string>

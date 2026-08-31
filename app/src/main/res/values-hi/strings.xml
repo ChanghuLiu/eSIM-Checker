@@ -10,6 +10,7 @@
     <string name="status_description_ready">Android इस डिवाइस में eSIM हार्डवेयर और सक्रिय eSIM सेवा की सूचना देता है।</string>
     <string name="status_description_partially_ready">eSIM हार्डवेयर का पता चला, लेकिन Android eSIM सेवा अभी उपलब्ध नहीं है। डिवाइस क्षेत्र, फ़र्मवेयर और मोबाइल नेटवर्क कॉन्फ़िगरेशन की जाँच करें।</string>
     <string name="status_description_not_ready">यह डिवाइस Android eSIM हार्डवेयर समर्थन की सूचना नहीं देता।</string>
+    <string name="status_description_android_api_unavailable">Android 8.1 समर्थित Android eSIM API के माध्यम से eSIM क्षमता की अपने-आप जानकारी नहीं दे सकता। SIM सेटिंग और अपने डिवाइस के सटीक मॉडल की मैन्युअल रूप से जाँच करें।</string>
     <string name="device_section">डिवाइस</string>
     <string name="manufacturer_label">निर्माता</string>
     <string name="device_model_label">डिवाइस मॉडल</string>
