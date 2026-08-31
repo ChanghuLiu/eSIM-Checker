@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">eSIM 检测器</string>
+    <string name="app_name">eSIM Checker</string>
     <string name="unknown_value">未知</string>
     <string name="result_ready">可使用 eSIM</string>
     <string name="result_partially_ready">eSIM 支持需要验证</string>
@@ -127,6 +127,11 @@
     <string name="privacy_no_ads_analytics">不包含广告或分析 SDK。</string>
     <string name="privacy_no_guarantee">本应用不保证与特定运营商或 eSIM 提供商兼容。</string>
     <string name="contact_label">联系方式：</string>
+    <string name="send_feedback">发送反馈</string>
+    <string name="feedback_guidance">不确定结果是否正确？请在 SIM 设置中验证，或向我们发送反馈。</string>
+    <string name="feedback_no_email_app">此设备上没有可用的兼容电子邮件应用。</string>
+    <string name="feedback_subject">eSIM Checker 测试反馈</string>
+    <string name="feedback_email_body">应用版本：%1$s\nAndroid 版本：%2$s\n设备制造商/型号：%3$s %4$s\n\neSIM 结果准确吗？\n哪些地方运行良好？\n哪些地方令人困惑？\n有任何问题或建议吗？</string>
     <string name="language_section">语言</string>
     <string name="system_default">跟随系统</string>
     <string name="back">返回</string>

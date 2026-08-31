@@ -20,12 +20,16 @@ class MainActivity : AppCompatActivity() {
         val initialResult = checker.check()
 
         setContent {
-            var compatibilityResult by remember { mutableStateOf(initialResult) }
+            var compatibilityResult by remember {
+                mutableStateOf(intent.applyDebugEsimSimulation(initialResult))
+            }
 
             ESIMCheckerTheme {
                 EsimCheckerApp(
                     result = compatibilityResult,
-                    onCheckAgain = { compatibilityResult = checker.check() },
+                    onCheckAgain = {
+                        compatibilityResult = intent.applyDebugEsimSimulation(checker.check())
+                    },
                 )
             }
         }

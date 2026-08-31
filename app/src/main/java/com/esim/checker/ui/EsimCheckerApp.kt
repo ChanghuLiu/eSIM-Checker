@@ -2,6 +2,10 @@ package com.esim.checker.ui
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -37,6 +41,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,6 +59,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.esim.checker.BuildConfig
+import com.esim.checker.AppLocaleTags
+import com.esim.checker.bidiIsolate
 import com.esim.checker.EsimCompatibilityResult
 import com.esim.checker.EsimResultStatus
 import com.esim.checker.EsimSettingsNavigator
@@ -136,6 +143,17 @@ fun EsimCheckerApp(
         mutableStateOf(purchaseCheckStore.readProviderCompatibility())
     }
     val settingsUnavailableMessage = stringResource(R.string.settings_unavailable)
+    val unknownValue = stringResource(R.string.unknown_value)
+    val feedbackEmail = stringResource(R.string.contact_email)
+    val feedbackSubject = stringResource(R.string.feedback_subject)
+    val feedbackEmailBody = stringResource(
+        R.string.feedback_email_body,
+        BuildConfig.VERSION_NAME,
+        Build.VERSION.RELEASE.ifBlank { unknownValue },
+        Build.MANUFACTURER.ifBlank { unknownValue },
+        Build.MODEL.ifBlank { unknownValue },
+    )
+    val feedbackNoEmailAppMessage = stringResource(R.string.feedback_no_email_app)
     val settingsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
     ) {
@@ -225,6 +243,22 @@ fun EsimCheckerApp(
                 howToReturnPage = AppPage.ABOUT
                 currentPage = AppPage.HOW_TO
             },
+            onSendFeedback = {
+                val feedbackIntent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.fromParts("mailto", feedbackEmail, null)
+                    putExtra(Intent.EXTRA_SUBJECT, feedbackSubject)
+                    putExtra(Intent.EXTRA_TEXT, feedbackEmailBody)
+                }
+                try {
+                    context.startActivity(feedbackIntent)
+                } catch (_: ActivityNotFoundException) {
+                    Toast.makeText(
+                        context,
+                        feedbackNoEmailAppMessage,
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            },
         )
 
         AppPage.PRIVACY -> PrivacyPolicyScreen(
@@ -310,6 +344,13 @@ private fun CompatibilityScreen(
             Spacer(modifier = Modifier.size(12.dp))
 
             CompatibilityCard(result = result)
+
+            Text(
+                text = stringResource(R.string.feedback_guidance),
+                modifier = Modifier.padding(top = 12.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall,
+            )
 
             Spacer(modifier = Modifier.size(12.dp))
 
@@ -429,6 +470,7 @@ private fun CompatibilityScreen(
 
 @Composable
 private fun DeviceCard(result: EsimCompatibilityResult) {
+    val context = LocalContext.current
     InfoCard(title = stringResource(R.string.device_section)) {
         Text(
             text = deviceDisplayName(result),
@@ -438,12 +480,15 @@ private fun DeviceCard(result: EsimCompatibilityResult) {
         HorizontalDivider(modifier = Modifier.padding(vertical = 14.dp))
         InfoRow(
             label = stringResource(R.string.manufacturer_label),
-            value = result.deviceManufacturer,
+            value = context.bidiIsolate(result.deviceManufacturer),
         )
-        InfoRow(label = stringResource(R.string.device_model_label), value = result.deviceModel)
+        InfoRow(
+            label = stringResource(R.string.device_model_label),
+            value = context.bidiIsolate(result.deviceModel),
+        )
         InfoRow(
             label = stringResource(R.string.android_version_label),
-            value = result.androidVersion,
+            value = context.bidiIsolate(result.androidVersion),
             isLast = true,
         )
     }
@@ -817,7 +862,7 @@ private fun TravelEsimCheckScreen(
                     style = MaterialTheme.typography.labelMedium,
                 )
                 Text(
-                    text = result.deviceModel,
+                    text = context.bidiIsolate(result.deviceModel),
                     modifier = Modifier.padding(top = 3.dp),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
@@ -964,7 +1009,7 @@ private fun SystemEvidenceCard(
         )
         InfoRow(
             label = stringResource(R.string.exact_device_model),
-            value = result.deviceModel,
+            value = LocalContext.current.bidiIsolate(result.deviceModel),
             isLast = true,
         )
 
@@ -1251,6 +1296,11 @@ private fun PurchaseSummaryRow(
     signal: PurchaseSignal,
     isLast: Boolean = false,
 ) {
+    val valueDescriptionRes = when (signal) {
+        PurchaseSignal.PASS -> R.string.purchase_status_pass
+        PurchaseSignal.UNCERTAIN -> R.string.manual_verification_recommended
+        PurchaseSignal.FAIL -> R.string.esim_not_detected
+    }
     InfoRow(
         label = stringResource(labelRes),
         value = stringResource(
@@ -1261,6 +1311,7 @@ private fun PurchaseSummaryRow(
             },
         ),
         valueColor = purchaseSignalColor(signal),
+        valueContentDescription = stringResource(valueDescriptionRes),
         isLast = isLast,
     )
 }
@@ -1398,6 +1449,13 @@ private fun ChecklistRow(
     isPositive: Boolean?,
     text: String,
 ) {
+    val symbolDescription = stringResource(
+        when (isPositive) {
+            true -> R.string.esim_supported
+            false -> R.string.esim_not_detected
+            null -> R.string.manual_verification_recommended
+        },
+    )
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -1412,6 +1470,9 @@ private fun ChecklistRow(
                     null -> R.string.status_symbol_warning
                 },
             ),
+            modifier = Modifier.semantics {
+                contentDescription = symbolDescription
+            },
             color = when (isPositive) {
                 true -> signalColor(true)
                 false -> signalColor(false)
@@ -1432,12 +1493,21 @@ private fun LanguageCard() {
     var expanded by rememberSaveable { mutableStateOf(false) }
     val options = languageOptions()
     val applicationLocales = AppCompatDelegate.getApplicationLocales()
-    val selectedTag = if (applicationLocales.isEmpty) {
+    val rawSelectedTag = if (applicationLocales.isEmpty) {
         null
     } else {
         applicationLocales[0]?.toLanguageTag()
     }
+    val selectedTag = rawSelectedTag?.let(AppLocaleTags::canonicalize)
     val selectedOption = options.firstOrNull { it.languageTag == selectedTag } ?: options.first()
+
+    LaunchedEffect(rawSelectedTag, selectedTag) {
+        if (rawSelectedTag != null && selectedTag != null && rawSelectedTag != selectedTag) {
+            AppCompatDelegate.setApplicationLocales(
+                LocaleListCompat.forLanguageTags(selectedTag),
+            )
+        }
+    }
 
     InfoCard(title = stringResource(R.string.language_section)) {
         Box(modifier = Modifier.fillMaxWidth()) {
@@ -1476,13 +1546,20 @@ private fun LanguageCard() {
 private fun languageOptions(): List<LanguageOption> = listOf(
     LanguageOption(languageTag = null, labelRes = R.string.system_default),
     LanguageOption(languageTag = "en", labelRes = R.string.language_name_english),
-    LanguageOption(languageTag = "es", labelRes = R.string.language_name_spanish),
-    LanguageOption(languageTag = "pt", labelRes = R.string.language_name_portuguese),
     LanguageOption(languageTag = "ar", labelRes = R.string.language_name_arabic),
-    LanguageOption(languageTag = "tr", labelRes = R.string.language_name_turkish),
-    LanguageOption(languageTag = "id", labelRes = R.string.language_name_indonesian),
-    LanguageOption(languageTag = "fr", labelRes = R.string.language_name_french),
     LanguageOption(languageTag = "zh-CN", labelRes = R.string.language_name_simplified_chinese),
+    LanguageOption(languageTag = "zh-TW", labelRes = R.string.language_name_traditional_chinese),
+    LanguageOption(languageTag = "fr", labelRes = R.string.language_name_french),
+    LanguageOption(languageTag = "de", labelRes = R.string.language_name_german),
+    LanguageOption(languageTag = "hi", labelRes = R.string.language_name_hindi),
+    LanguageOption(languageTag = "id", labelRes = R.string.language_name_indonesian),
+    LanguageOption(languageTag = "it", labelRes = R.string.language_name_italian),
+    LanguageOption(languageTag = "ja", labelRes = R.string.language_name_japanese),
+    LanguageOption(languageTag = "ko", labelRes = R.string.language_name_korean),
+    LanguageOption(languageTag = "pt-BR", labelRes = R.string.language_name_portuguese),
+    LanguageOption(languageTag = "ru", labelRes = R.string.language_name_russian),
+    LanguageOption(languageTag = "es-ES", labelRes = R.string.language_name_spanish),
+    LanguageOption(languageTag = "tr", labelRes = R.string.language_name_turkish),
 )
 
 @Composable
@@ -1514,6 +1591,7 @@ private fun InfoRow(
     label: String,
     value: String,
     valueColor: Color = MaterialTheme.colorScheme.onSurface,
+    valueContentDescription: String? = null,
     isLast: Boolean = false,
 ) {
     Row(
@@ -1521,7 +1599,7 @@ private fun InfoRow(
             .fillMaxWidth()
             .padding(bottom = if (isLast) 0.dp else 13.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Top,
     ) {
         Text(
             text = label,
@@ -1529,13 +1607,25 @@ private fun InfoRow(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodyMedium,
         )
-        Spacer(modifier = Modifier.width(16.dp))
+        Spacer(modifier = Modifier.width(12.dp))
         Text(
             text = value,
+            modifier = Modifier
+                .weight(1f)
+                .then(
+                    if (valueContentDescription == null) {
+                        Modifier
+                    } else {
+                        Modifier.semantics {
+                            contentDescription = valueContentDescription
+                        }
+                    },
+                ),
             color = valueColor,
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.SemiBold,
             textAlign = TextAlign.End,
+            softWrap = true,
         )
     }
 }
@@ -1545,6 +1635,7 @@ private fun AboutScreen(
     onBack: () -> Unit,
     onShowPrivacy: () -> Unit,
     onShowInstructions: () -> Unit,
+    onSendFeedback: () -> Unit,
 ) {
     Scaffold(containerColor = MaterialTheme.colorScheme.background) { contentPadding ->
         Column(
@@ -1588,6 +1679,14 @@ private fun AboutScreen(
                     .padding(top = 12.dp),
             ) {
                 Text(stringResource(R.string.how_to_add_esim))
+            }
+            OutlinedButton(
+                onClick = onSendFeedback,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp),
+            ) {
+                Text(stringResource(R.string.send_feedback))
             }
         }
     }
@@ -1825,13 +1924,14 @@ private fun signalColor(isPositive: Boolean): Color = if (isPositive) {
 
 @Composable
 private fun deviceDisplayName(result: EsimCompatibilityResult): String {
+    val context = LocalContext.current
     return if (result.deviceModel.startsWith(result.deviceManufacturer, ignoreCase = true)) {
-        result.deviceModel
+        context.bidiIsolate(result.deviceModel)
     } else {
         stringResource(
             R.string.device_display_name,
-            result.deviceManufacturer,
-            result.deviceModel,
+            context.bidiIsolate(result.deviceManufacturer),
+            context.bidiIsolate(result.deviceModel),
         )
     }
 }

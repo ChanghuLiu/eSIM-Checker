@@ -43,9 +43,9 @@ fun EsimCompatibilityResult.toFullReportText(
     manualVerificationResult: ManualVerificationResult,
 ): String = context.getString(
     R.string.copy_full_report_template,
-    deviceManufacturer,
-    deviceModel,
-    androidVersion,
+    context.bidiIsolate(deviceManufacturer),
+    context.bidiIsolate(deviceModel),
+    context.bidiIsolate(androidVersion),
     context.getString(if (hasEuiccFeature) R.string.detected else R.string.not_detected),
     context.getString(if (euiccEnabled) R.string.available else R.string.unavailable),
     context.getString(if (androidEsimApiAvailable) R.string.supported else R.string.unsupported),

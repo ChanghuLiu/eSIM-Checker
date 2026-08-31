@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vérificateur eSIM</string>
+    <string name="app_name">eSIM Checker</string>
     <string name="unknown_value">Inconnu</string>
     <string name="result_ready">Prêt pour une eSIM</string>
     <string name="result_partially_ready">La prise en charge eSIM doit être vérifiée</string>
@@ -127,6 +127,11 @@
     <string name="privacy_no_ads_analytics">Aucun SDK publicitaire ou d’analyse n’est inclus.</string>
     <string name="privacy_no_guarantee">L’application ne garantit pas la compatibilité avec un opérateur ou un fournisseur eSIM spécifique.</string>
     <string name="contact_label">Contact :</string>
+    <string name="send_feedback">Envoyer des commentaires</string>
+    <string name="feedback_guidance">Vous n’êtes pas sûr du résultat ? Vérifiez-le dans les paramètres SIM ou envoyez-nous vos commentaires.</string>
+    <string name="feedback_no_email_app">Aucune application de messagerie compatible n’est disponible sur cet appareil.</string>
+    <string name="feedback_subject">Commentaires de test eSIM Checker</string>
+    <string name="feedback_email_body">Version de l’application : %1$s\nVersion d’Android : %2$s\nFabricant/modèle de l’appareil : %3$s %4$s\n\nLe résultat eSIM était-il exact ?\nQu’est-ce qui a bien fonctionné ?\nQu’est-ce qui était déroutant ?\nUn problème ou une suggestion ?</string>
     <string name="language_section">Langue</string>
     <string name="system_default">Valeur par défaut du système</string>
     <string name="back">Retour</string>

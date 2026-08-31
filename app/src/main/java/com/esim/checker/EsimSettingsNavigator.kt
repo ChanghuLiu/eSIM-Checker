@@ -39,10 +39,11 @@ object EsimSettingsNavigator {
             EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS,
         )
         val wirelessSettingsIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
-        val embeddedSubscriptionsAvailable = canHandle(
-            context = context,
-            intent = embeddedSubscriptionsIntent,
-        )
+        val embeddedSubscriptionsAvailable = !context.forceDebugWirelessSettings() &&
+            canHandle(
+                context = context,
+                intent = embeddedSubscriptionsIntent,
+            )
         val wirelessSettingsAvailable = canHandle(
             context = context,
             intent = wirelessSettingsIntent,

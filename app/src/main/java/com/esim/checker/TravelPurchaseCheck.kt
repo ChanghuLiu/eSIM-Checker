@@ -160,17 +160,21 @@ fun EsimCompatibilityResult.toPurchaseCheckText(
     outcome: TravelPurchaseOutcome,
 ): String {
     val displayName = if (deviceModel.startsWith(deviceManufacturer, ignoreCase = true)) {
-        deviceModel
+        context.bidiIsolate(deviceModel)
     } else {
-        context.getString(R.string.device_display_name, deviceManufacturer, deviceModel)
+        context.getString(
+            R.string.device_display_name,
+            context.bidiIsolate(deviceManufacturer),
+            context.bidiIsolate(deviceModel),
+        )
     }
     return context.getString(
         R.string.copy_purchase_check_template,
         displayName,
-        deviceManufacturer,
-        deviceModel,
-        deviceCodename,
-        androidVersion,
+        context.bidiIsolate(deviceManufacturer),
+        context.bidiIsolate(deviceModel),
+        context.bidiIsolate(deviceCodename),
+        context.bidiIsolate(androidVersion),
         context.getString(if (hasEuiccFeature) R.string.detected else R.string.not_detected),
         context.getString(if (euiccEnabled) R.string.available else R.string.unavailable),
         context.getString(

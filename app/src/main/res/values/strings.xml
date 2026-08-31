@@ -144,18 +144,30 @@
     <string name="privacy_no_ads_analytics">No advertising or analytics SDK is included.</string>
     <string name="privacy_no_guarantee">The app does not guarantee compatibility with a specific carrier or eSIM provider.</string>
     <string name="contact_label">Contact:</string>
-    <string name="contact_email" translatable="false">artbyte@126.com</string>
+    <string name="contact_email" translatable="false">launchcircle.server@gmail.com</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="feedback_guidance">Not sure the result is correct? Verify it in SIM settings or send us feedback.</string>
+    <string name="feedback_no_email_app">No compatible email app is available on this device.</string>
+    <string name="feedback_subject">eSIM Checker testing feedback</string>
+    <string name="feedback_email_body">App version: %1$s\nAndroid version: %2$s\nDevice manufacturer/model: %3$s %4$s\n\nWas the eSIM result accurate?\nWhat worked well?\nWhat was confusing?\nAny problem or suggestion?</string>
 
     <string name="language_section">Language</string>
     <string name="system_default">System default</string>
     <string name="language_name_english" translatable="false">English</string>
     <string name="language_name_spanish" translatable="false">Español</string>
-    <string name="language_name_portuguese" translatable="false">Português</string>
+    <string name="language_name_portuguese" translatable="false">Português (Brasil)</string>
     <string name="language_name_arabic" translatable="false">العربية</string>
     <string name="language_name_turkish" translatable="false">Türkçe</string>
     <string name="language_name_indonesian" translatable="false">Bahasa Indonesia</string>
     <string name="language_name_french" translatable="false">Français</string>
     <string name="language_name_simplified_chinese" translatable="false">简体中文</string>
+    <string name="language_name_traditional_chinese" translatable="false">繁體中文</string>
+    <string name="language_name_german" translatable="false">Deutsch</string>
+    <string name="language_name_hindi" translatable="false">हिन्दी</string>
+    <string name="language_name_italian" translatable="false">Italiano</string>
+    <string name="language_name_japanese" translatable="false">日本語</string>
+    <string name="language_name_korean" translatable="false">한국어</string>
+    <string name="language_name_russian" translatable="false">Русский</string>
 
     <string name="back">Back</string>
     <string name="how_to_intro">Use the steps below after purchasing an eSIM plan.</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">eSIM Denetleyici</string>
+    <string name="app_name">eSIM Checker</string>
     <string name="unknown_value">Bilinmiyor</string>
     <string name="result_ready">eSIM için Hazır</string>
     <string name="result_partially_ready">eSIM Desteğinin Doğrulanması Gerekiyor</string>
@@ -127,6 +127,11 @@
     <string name="privacy_no_ads_analytics">Reklam veya analiz SDK bileşeni yoktur.</string>
     <string name="privacy_no_guarantee">Uygulama, belirli bir operatör veya eSIM sağlayıcısıyla uyumluluğu garanti etmez.</string>
     <string name="contact_label">İletişim:</string>
+    <string name="send_feedback">Geri bildirim gönder</string>
+    <string name="feedback_guidance">Sonucun doğru olduğundan emin değil misiniz? SIM ayarlarından doğrulayın veya bize geri bildirim gönderin.</string>
+    <string name="feedback_no_email_app">Bu cihazda uyumlu bir e-posta uygulaması bulunmuyor.</string>
+    <string name="feedback_subject">eSIM Checker test geri bildirimi</string>
+    <string name="feedback_email_body">Uygulama sürümü: %1$s\nAndroid sürümü: %2$s\nCihaz üreticisi/modeli: %3$s %4$s\n\neSIM sonucu doğru muydu?\nNe iyi çalıştı?\nNe kafa karıştırıcıydı?\nBir sorun veya öneriniz var mı?</string>
     <string name="language_section">Dil</string>
     <string name="system_default">Sistem varsayılanı</string>
     <string name="back">Geri</string>

@@ -36,8 +36,8 @@ android {
         applicationId = "com.esim.checker"
         minSdk = 28
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.9"
+        versionCode = 11
+        versionName = "0.9.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

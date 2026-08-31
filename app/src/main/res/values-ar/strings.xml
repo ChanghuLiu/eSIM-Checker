@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">فاحص eSIM</string>
+    <string name="app_name">eSIM Checker</string>
     <string name="unknown_value">غير معروف</string>
     <string name="result_ready">جاهز لاستخدام eSIM</string>
     <string name="result_partially_ready">دعم eSIM يحتاج إلى التحقق</string>
@@ -127,6 +127,11 @@
     <string name="privacy_no_ads_analytics">لا يتضمن التطبيق أي حزمة SDK للإعلانات أو التحليلات.</string>
     <string name="privacy_no_guarantee">لا يضمن التطبيق التوافق مع شركة اتصالات أو مزود eSIM محدد.</string>
     <string name="contact_label">التواصل:</string>
+    <string name="send_feedback">إرسال ملاحظات</string>
+    <string name="feedback_guidance">ألست متأكدًا من صحة النتيجة؟ تحقّق منها في إعدادات SIM أو أرسل لنا ملاحظاتك.</string>
+    <string name="feedback_no_email_app">لا يتوفر تطبيق بريد إلكتروني متوافق على هذا الجهاز.</string>
+    <string name="feedback_subject">ملاحظات اختبار eSIM Checker</string>
+    <string name="feedback_email_body">إصدار التطبيق: %1$s\nإصدار Android: %2$s\nالشركة المصنّعة/طراز الجهاز: %3$s %4$s\n\nهل كانت نتيجة eSIM دقيقة؟\nما الذي عمل جيدًا؟\nما الذي كان مربكًا؟\nهل لديك مشكلة أو اقتراح؟</string>
     <string name="language_section">اللغة</string>
     <string name="system_default">إعداد النظام الافتراضي</string>
     <string name="back">رجوع</string>
