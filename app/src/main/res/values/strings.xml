@@ -199,11 +199,11 @@
     <string name="copy_full_report_template">Manufacturer: %1$s\nModel: %2$s\nAndroid version: %3$s\neSIM Hardware: %4$s\neSIM Service: %5$s\nAndroid eSIM API: %6$s\nAndroid detection: %7$s\nSystem settings verification: %8$s</string>
     <string name="privacy_ads_data">When Rewarded ads are enabled, Google Mobile Ads may collect and share your IP address (which may estimate general location), app interactions such as taps and video views, diagnostic information, and device/account identifiers for advertising, analytics, and fraud prevention. Data is encrypted in transit. Ads may be preloaded; watching one is optional. Where shown, use Ad privacy options to manage consent choices.</string>
     <string name="ad_privacy_options">Ad privacy options</string>
-    <string name="watch_ad_and_check_esim">Watch an ad and check eSIM</string>
-    <string name="check_without_ad">Check without an ad</string>
+    <string name="check_esim">Check eSIM</string>
     <string name="check_entry_title">Check your eSIM compatibility</string>
-    <string name="check_entry_description">Choose how to start your eSIM compatibility check.</string>
-    <string name="rewarded_check_loading">Preparing an ad. You can check without an ad at any time.</string>
-    <string name="rewarded_check_not_earned">The check did not start because the ad reward was not earned. You can try again or check without an ad.</string>
-    <string name="rewarded_check_unavailable">A rewarded ad is unavailable right now. You can check without an ad.</string>
+    <string name="check_entry_description">A rewarded ad plays before the compatibility check. The check starts only after you earn the reward.</string>
+    <string name="rewarded_check_disclosure">A rewarded ad plays before your eSIM check.</string>
+    <string name="rewarded_check_loading">Preparing a rewarded ad.</string>
+    <string name="rewarded_check_not_earned">The check did not start because the ad reward was not earned. Tap Check eSIM to try again.</string>
+    <string name="rewarded_check_unavailable">A rewarded ad is unavailable right now. Please try again.</string>
 </resources>

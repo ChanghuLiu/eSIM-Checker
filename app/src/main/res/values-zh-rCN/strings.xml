@@ -160,11 +160,11 @@
     <string name="privacy_purchase_processing">Pro 购买由 Google Play 处理。应用会在本机保存 Pro 权益状态，以便通过查询 Google Play 购买记录恢复权限。</string>
     <string name="privacy_ads_data">启用激励广告后，Google Mobile Ads 可能会收集并共享您的 IP 地址（可能用于估算大致位置）、应用互动（如点击和视频观看）、诊断信息，以及用于广告、分析和防欺诈的设备/账号标识符。传输中的数据会加密。广告可能会预加载；观看广告是自愿的。如应用中显示相关入口，可在“广告隐私选项”中管理同意。</string>
     <string name="ad_privacy_options">广告隐私选项</string>
-    <string name="watch_ad_and_check_esim">观看广告并检查 eSIM</string>
-    <string name="check_without_ad">不看广告，直接检查</string>
+    <string name="check_esim">检查 eSIM</string>
     <string name="check_entry_title">检查您的 eSIM 兼容性</string>
-    <string name="check_entry_description">选择如何开始 eSIM 兼容性检查。</string>
-    <string name="rewarded_check_loading">正在准备广告。您也可以随时不看广告直接检查。</string>
-    <string name="rewarded_check_not_earned">未获得广告奖励，检查尚未开始。您可以重试或不看广告直接检查。</string>
-    <string name="rewarded_check_unavailable">激励广告暂不可用，您可以不看广告直接检查。</string>
+    <string name="check_entry_description">开始兼容性检查前会播放一则激励广告；获得奖励后才开始检查。</string>
+    <string name="rewarded_check_disclosure">开始 eSIM 检查前会播放一则激励广告。</string>
+    <string name="rewarded_check_loading">正在准备激励广告。</string>
+    <string name="rewarded_check_not_earned">未获得广告奖励，检查尚未开始。点击“检查 eSIM”可重试。</string>
+    <string name="rewarded_check_unavailable">激励广告暂时无法使用，请稍后重试。</string>
 </resources>

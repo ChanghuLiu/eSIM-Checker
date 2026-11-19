@@ -149,7 +149,10 @@ fun EsimCheckerApp(
     val rewardedAds = remember(applicationContext) {
         RewardedAdController(
             context = applicationContext,
-            onReadyChanged = { rewardReady = it },
+            onReadyChanged = {
+                rewardReady = it
+                if (it) adCheckMessage = null
+            },
             onPrivacyOptionsRequiredChanged = { adPrivacyOptionsRequired = it },
         )
     }
@@ -284,10 +287,6 @@ fun EsimCheckerApp(
                 rewardReady = rewardReady,
                 message = adCheckMessage?.let { stringResource(it) },
                 onWatchAdAndCheck = watchAdAndCheck,
-                onCheckWithoutAd = {
-                    adCheckMessage = null
-                    onCheckAgain()
-                },
             )
         } else {
             CompatibilityScreen(
@@ -297,10 +296,6 @@ fun EsimCheckerApp(
                 rewardReady = rewardReady,
                 message = adCheckMessage?.let { stringResource(it) },
                 onWatchAdAndCheck = watchAdAndCheck,
-                onCheckWithoutAd = {
-                    adCheckMessage = null
-                    onCheckAgain()
-                },
                 onOpenSettings = openSettings,
                 onManualVerificationChanged = { updatedResult ->
                     manualVerificationResult = updatedResult
@@ -395,7 +390,6 @@ private fun CheckEntryScreen(
     rewardReady: Boolean,
     message: String?,
     onWatchAdAndCheck: () -> Unit,
-    onCheckWithoutAd: () -> Unit,
 ) {
     Scaffold(containerColor = MaterialTheme.colorScheme.background) { contentPadding ->
         Column(
@@ -437,10 +431,9 @@ private fun CheckEntryScreen(
             }
             Button(
                 onClick = onWatchAdAndCheck,
-                enabled = rewardReady,
                 modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
             ) {
-                Text(stringResource(R.string.watch_ad_and_check_esim))
+                Text(stringResource(R.string.check_esim))
             }
             if (!rewardReady) {
                 Text(
@@ -450,12 +443,6 @@ private fun CheckEntryScreen(
                     style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.Center,
                 )
-            }
-            OutlinedButton(
-                onClick = onCheckWithoutAd,
-                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
-            ) {
-                Text(stringResource(R.string.check_without_ad))
             }
         }
     }
@@ -469,7 +456,6 @@ private fun CompatibilityScreen(
     rewardReady: Boolean,
     message: String?,
     onWatchAdAndCheck: () -> Unit,
-    onCheckWithoutAd: () -> Unit,
     onOpenSettings: () -> Unit,
     onManualVerificationChanged: (ManualVerificationResult) -> Unit,
     onShowTravelCheck: () -> Unit,
@@ -591,11 +577,17 @@ private fun CompatibilityScreen(
             }
             Button(
                 onClick = onWatchAdAndCheck,
-                enabled = rewardReady,
                 modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
             ) {
-                Text(stringResource(R.string.watch_ad_and_check_esim))
+                Text(stringResource(R.string.check_esim))
             }
+            Text(
+                text = stringResource(R.string.rewarded_check_disclosure),
+                modifier = Modifier.padding(top = 8.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center,
+            )
             if (!rewardReady) {
                 Text(
                     text = stringResource(R.string.rewarded_check_loading),
@@ -604,12 +596,6 @@ private fun CompatibilityScreen(
                     style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.Center,
                 )
-            }
-            OutlinedButton(
-                onClick = onCheckWithoutAd,
-                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
-            ) {
-                Text(stringResource(R.string.check_without_ad))
             }
 
             OutlinedButton(
