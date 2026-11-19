@@ -16,6 +16,9 @@ val releaseSigningPropertiesFile = providers
     )
     .get()
 val releaseSigningProperties = Properties()
+val productionRewardedAdsEnabled = providers.gradleProperty("enableProductionRewardedAds").orNull == "true"
+val umpTestFlowEnabled = providers.gradleProperty("enableUmpTestFlow").orNull == "true"
+val umpTestDeviceHashedId = providers.gradleProperty("umpTestDeviceHashedId").orNull.orEmpty()
 val releaseSigningConfigured = releaseSigningPropertiesFile.isFile
 
 if (releaseSigningConfigured) {
@@ -36,8 +39,8 @@ android {
         applicationId = "com.esim.checker"
         minSdk = 27
         targetSdk = 36
-        versionCode = 11
-        versionName = "0.9.2"
+        versionCode = 17
+        versionName = "0.9.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,7 +57,27 @@ android {
     }
 
     buildTypes {
+        debug {
+            // UMP's published message is package-bound; exact package is used only on a device without Play app installed.
+            applicationIdSuffix = if (umpTestFlowEnabled) "" else ".adtest"
+            versionNameSuffix = "-ads-test"
+            manifestPlaceholders["admobAppId"] = if (umpTestFlowEnabled) {
+                "ca-app-pub-8828197651861282~4506767275"
+            } else {
+                "ca-app-pub-3940256099942544~3347511713"
+            }
+            buildConfigField("String", "ADMOB_REWARDED_AD_UNIT_ID", "\"ca-app-pub-3940256099942544/5224354917\"")
+            buildConfigField("String", "ADMOB_APP_OPEN_AD_UNIT_ID", "\"ca-app-pub-3940256099942544/9257395921\"")
+            buildConfigField("boolean", "REWARDED_ADS_ENABLED", "true")
+            buildConfigField("boolean", "UMP_TEST_FLOW_ENABLED", umpTestFlowEnabled.toString())
+            buildConfigField("String", "UMP_TEST_DEVICE_HASHED_ID", "\"$umpTestDeviceHashedId\"")
+        }
         release {
+            buildConfigField("boolean", "UMP_TEST_FLOW_ENABLED", "false")
+            buildConfigField("String", "UMP_TEST_DEVICE_HASHED_ID", "\"\"")
+            buildConfigField("String", "ADMOB_REWARDED_AD_UNIT_ID", "\"ca-app-pub-8828197651861282/8426966450\"")
+            buildConfigField("String", "ADMOB_APP_OPEN_AD_UNIT_ID", "\"ca-app-pub-8828197651861282/3192106597\"")
+            buildConfigField("boolean", "REWARDED_ADS_ENABLED", productionRewardedAdsEnabled.toString())
             if (releaseSigningConfigured) {
                 signingConfig = signingConfigs.getByName("release")
             }
@@ -82,7 +105,11 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.google.play.billing)
+    implementation(libs.google.mobile.ads)
+    implementation(libs.google.ump)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

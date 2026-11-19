@@ -6,6 +6,11 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.app.Activity
+import android.graphics.pdf.PdfDocument
+import android.content.Context
+import android.content.ContextWrapper
+import androidx.core.content.FileProvider
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -41,6 +46,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,6 +64,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.esim.checker.LocalPdfReport
+import com.esim.checker.ProPurchaseManager
+import com.esim.checker.ProPurchaseState
+import com.esim.checker.RewardedAdController
+import java.io.File
 import com.esim.checker.BuildConfig
 import com.esim.checker.AppLocaleTags
 import com.esim.checker.bidiIsolate
@@ -117,11 +131,95 @@ private enum class PurchaseSignal {
 
 @Composable
 fun EsimCheckerApp(
-    result: EsimCompatibilityResult,
+    result: EsimCompatibilityResult?,
     onCheckAgain: () -> Unit,
 ) {
     val context = LocalContext.current
     val applicationContext = context.applicationContext
+    var proState by remember(applicationContext) {
+        mutableStateOf(ProPurchaseState())
+    }
+    val proPurchaseManager = remember(applicationContext) {
+        ProPurchaseManager(applicationContext) { updated -> proState = updated }
+    }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    var rewardReady by remember { mutableStateOf(false) }
+    var adCheckMessage by remember { mutableStateOf<Int?>(null) }
+    var adPrivacyOptionsRequired by remember { mutableStateOf(false) }
+    val rewardedAds = remember(applicationContext) {
+        RewardedAdController(
+            context = applicationContext,
+            onReadyChanged = {
+                rewardReady = it
+                if (it) adCheckMessage = null
+            },
+            onPrivacyOptionsRequiredChanged = { adPrivacyOptionsRequired = it },
+        )
+    }
+    LaunchedEffect(rewardedAds) {
+        context.findActivity()?.let(rewardedAds::start)
+    }
+    val watchAdAndCheck = {
+        val activity = context.findActivity()
+        if (activity == null) {
+            adCheckMessage = R.string.rewarded_check_unavailable
+        } else {
+            adCheckMessage = null
+            rewardedAds.showRewarded(
+                activity = activity,
+                onEarned = {
+                    adCheckMessage = null
+                    onCheckAgain()
+                },
+                onClosedWithoutReward = {
+                    adCheckMessage = R.string.rewarded_check_not_earned
+                },
+                onUnavailable = {
+                    adCheckMessage = R.string.rewarded_check_unavailable
+                },
+            )
+        }
+    }
+
+    var pendingPdfBytes by remember { mutableStateOf<ByteArray?>(null) }
+    val pdfSavedMessage = stringResource(R.string.pro_pdf_saved)
+    val pdfErrorMessage = stringResource(R.string.pro_pdf_error)
+    val createPdfLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("application/pdf"),
+    ) { uri ->
+        val bytes = pendingPdfBytes
+        pendingPdfBytes = null
+        if (uri != null && bytes != null) {
+            runCatching {
+                context.contentResolver.openOutputStream(uri)?.use { it.write(bytes) }
+                    ?: error("Unable to open destination")
+            }.onSuccess {
+                Toast.makeText(context, pdfSavedMessage, Toast.LENGTH_SHORT).show()
+            }.onFailure {
+                Toast.makeText(context, pdfErrorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    DisposableEffect(proPurchaseManager, lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) proPurchaseManager.refresh()
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        proPurchaseManager.start()
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+            proPurchaseManager.close()
+        }
+    }
+    val savePdf: (String) -> Unit = { report ->
+        if (proState.owned) {
+            pendingPdfBytes = LocalPdfReport.create(context, report)
+            createPdfLauncher.launch("eSIM-check-${System.currentTimeMillis()}.pdf")
+        }
+    }
+    val sharePdf: (String) -> Unit = { report ->
+        if (proState.owned) sharePdfReport(context, LocalPdfReport.create(context, report))
+    }
     val verificationStore = remember(applicationContext) {
         ManualVerificationStore(applicationContext)
     }
@@ -184,26 +282,36 @@ fun EsimCheckerApp(
     }
 
     when (currentPage) {
-        AppPage.MAIN -> CompatibilityScreen(
-            result = result,
-            manualVerificationResult = manualVerificationResult,
-            showManualVerification = showManualVerification,
-            onCheckAgain = onCheckAgain,
-            onOpenSettings = openSettings,
-            onManualVerificationChanged = { updatedResult ->
-                manualVerificationResult = updatedResult
-                verificationStore.saveResult(updatedResult)
-            },
-            onShowTravelCheck = { currentPage = AppPage.TRAVEL_CHECK },
-            onShowInstructions = {
-                howToReturnPage = AppPage.MAIN
-                currentPage = AppPage.HOW_TO
-            },
-            onShowAbout = { currentPage = AppPage.ABOUT },
-        )
+        AppPage.MAIN -> if (result == null) {
+            CheckEntryScreen(
+                rewardReady = rewardReady,
+                message = adCheckMessage?.let { stringResource(it) },
+                onWatchAdAndCheck = watchAdAndCheck,
+            )
+        } else {
+            CompatibilityScreen(
+                result = result,
+                manualVerificationResult = manualVerificationResult,
+                showManualVerification = showManualVerification,
+                rewardReady = rewardReady,
+                message = adCheckMessage?.let { stringResource(it) },
+                onWatchAdAndCheck = watchAdAndCheck,
+                onOpenSettings = openSettings,
+                onManualVerificationChanged = { updatedResult ->
+                    manualVerificationResult = updatedResult
+                    verificationStore.saveResult(updatedResult)
+                },
+                onShowTravelCheck = { currentPage = AppPage.TRAVEL_CHECK },
+                onShowInstructions = {
+                    howToReturnPage = AppPage.MAIN
+                    currentPage = AppPage.HOW_TO
+                },
+                onShowAbout = { currentPage = AppPage.ABOUT },
+            )
+        }
 
-        AppPage.TRAVEL_CHECK -> TravelEsimCheckScreen(
-            result = result,
+        AppPage.TRAVEL_CHECK -> result?.let { checkedResult -> TravelEsimCheckScreen(
+            result = checkedResult,
             settingsVerification = manualVerificationResult,
             carrierUnlocked = carrierUnlocked,
             providerCompatibility = providerCompatibility,
@@ -228,9 +336,15 @@ fun EsimCheckerApp(
                 showManualVerification = false
                 verificationStore.reset()
                 purchaseCheckStore.reset()
-                onCheckAgain()
             },
-        )
+            proState = proState,
+            onBuyPro = {
+                (context.findActivity())?.let(proPurchaseManager::buy)
+            },
+            onRestorePro = proPurchaseManager::refresh,
+            onSavePdf = savePdf,
+            onSharePdf = sharePdf,
+        ) }
 
         AppPage.HOW_TO -> HowToAddEsimScreen(
             onBack = { currentPage = howToReturnPage },
@@ -263,7 +377,74 @@ fun EsimCheckerApp(
 
         AppPage.PRIVACY -> PrivacyPolicyScreen(
             onBack = { currentPage = AppPage.ABOUT },
+            showAdPrivacyOptions = adPrivacyOptionsRequired,
+            onShowAdPrivacyOptions = {
+                context.findActivity()?.let(rewardedAds::showPrivacyOptions)
+            },
         )
+    }
+}
+
+@Composable
+private fun CheckEntryScreen(
+    rewardReady: Boolean,
+    message: String?,
+    onWatchAdAndCheck: () -> Unit,
+) {
+    Scaffold(containerColor = MaterialTheme.colorScheme.background) { contentPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .verticalScroll(rememberScrollState())
+                .padding(start = 20.dp, top = 36.dp, end = 20.dp, bottom = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = stringResource(R.string.app_name),
+                modifier = Modifier.fillMaxWidth(),
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+            )
+            Spacer(modifier = Modifier.size(24.dp))
+            Text(
+                text = stringResource(R.string.check_entry_title),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+            )
+            Text(
+                text = stringResource(R.string.check_entry_description),
+                modifier = Modifier.padding(top = 12.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+            )
+            message?.let {
+                Text(
+                    text = it,
+                    modifier = Modifier.padding(top = 16.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                )
+            }
+            Button(
+                onClick = onWatchAdAndCheck,
+                modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
+            ) {
+                Text(stringResource(R.string.check_esim))
+            }
+            if (!rewardReady) {
+                Text(
+                    text = stringResource(R.string.rewarded_check_loading),
+                    modifier = Modifier.padding(top = 8.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center,
+                )
+            }
+        }
     }
 }
 
@@ -272,7 +453,9 @@ private fun CompatibilityScreen(
     result: EsimCompatibilityResult,
     manualVerificationResult: ManualVerificationResult,
     showManualVerification: Boolean,
-    onCheckAgain: () -> Unit,
+    rewardReady: Boolean,
+    message: String?,
+    onWatchAdAndCheck: () -> Unit,
     onOpenSettings: () -> Unit,
     onManualVerificationChanged: (ManualVerificationResult) -> Unit,
     onShowTravelCheck: () -> Unit,
@@ -383,13 +566,36 @@ private fun CompatibilityScreen(
 
             BeforeYouBuyCard(result = result)
 
-            OutlinedButton(
-                onClick = onCheckAgain,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 20.dp),
+            message?.let {
+                Text(
+                    text = it,
+                    modifier = Modifier.padding(top = 18.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                )
+            }
+            Button(
+                onClick = onWatchAdAndCheck,
+                modifier = Modifier.fillMaxWidth().padding(top = 20.dp),
             ) {
-                Text(stringResource(R.string.check_again))
+                Text(stringResource(R.string.check_esim))
+            }
+            Text(
+                text = stringResource(R.string.rewarded_check_disclosure),
+                modifier = Modifier.padding(top = 8.dp),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center,
+            )
+            if (!rewardReady) {
+                Text(
+                    text = stringResource(R.string.rewarded_check_loading),
+                    modifier = Modifier.padding(top = 8.dp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center,
+                )
             }
 
             OutlinedButton(
@@ -689,6 +895,11 @@ private fun TravelEsimCheckScreen(
     onCarrierUnlockedChanged: (PurchaseCheckAnswer) -> Unit,
     onProviderCompatibilityChanged: (PurchaseCheckAnswer) -> Unit,
     onStartNewCheck: () -> Unit,
+    proState: ProPurchaseState,
+    onBuyPro: () -> Unit,
+    onRestorePro: () -> Unit,
+    onSavePdf: (String) -> Unit,
+    onSharePdf: (String) -> Unit,
 ) {
     val context = LocalContext.current
     var showStartNewCheckDialog by rememberSaveable { mutableStateOf(false) }
@@ -924,6 +1135,36 @@ private fun TravelEsimCheckScreen(
                 outcome = outcome,
             )
 
+            Spacer(modifier = Modifier.size(12.dp))
+
+            ProOfferCard(
+                state = proState,
+                onBuy = onBuyPro,
+                onRestore = onRestorePro,
+            )
+
+            val pdfReport = result.toPurchaseCheckText(
+                context = context,
+                settingsVerification = settingsVerification,
+                carrierUnlocked = carrierUnlocked,
+                providerCompatibility = providerCompatibility,
+                outcome = outcome,
+            )
+            if (proState.owned) {
+                OutlinedButton(
+                    onClick = { onSavePdf(pdfReport) },
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                ) {
+                    Text(stringResource(R.string.pro_save_pdf))
+                }
+                OutlinedButton(
+                    onClick = { onSharePdf(pdfReport) },
+                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                ) {
+                    Text(stringResource(R.string.pro_share_pdf))
+                }
+            }
+
             Button(
                 onClick = {
                     copyToClipboard(
@@ -968,6 +1209,67 @@ private fun TravelEsimCheckScreen(
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
             )
+        }
+    }
+}
+
+@Composable
+private fun ProOfferCard(
+    state: ProPurchaseState,
+    onBuy: () -> Unit,
+    onRestore: () -> Unit,
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = stringResource(R.string.pro_unlock_title),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                text = stringResource(R.string.pro_unlock_description),
+                modifier = Modifier.padding(top = 6.dp),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            if (state.pending) {
+                Text(
+                    text = stringResource(R.string.pro_pending),
+                    modifier = Modifier.padding(top = 10.dp),
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
+            if (state.owned) {
+                Text(
+                    text = stringResource(R.string.pro_owned),
+                    modifier = Modifier.padding(top = 10.dp),
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.SemiBold,
+                )
+            } else {
+                Button(
+                    onClick = onBuy,
+                    enabled = !state.loading && state.price != null,
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                ) {
+                    Text(
+                        text = state.price?.let { stringResource(R.string.pro_buy_price, it) }
+                            ?: stringResource(
+                                if (state.loading) R.string.pro_price_loading
+                                else R.string.pro_unavailable,
+                            ),
+                    )
+                }
+            }
+            TextButton(
+                onClick = onRestore,
+                modifier = Modifier.align(Alignment.End),
+            ) {
+                Text(stringResource(R.string.pro_restore))
+            }
         }
     }
 }
@@ -1693,7 +1995,11 @@ private fun AboutScreen(
 }
 
 @Composable
-private fun PrivacyPolicyScreen(onBack: () -> Unit) {
+private fun PrivacyPolicyScreen(
+    onBack: () -> Unit,
+    showAdPrivacyOptions: Boolean,
+    onShowAdPrivacyOptions: () -> Unit,
+) {
     Scaffold(containerColor = MaterialTheme.colorScheme.background) { contentPadding ->
         Column(
             modifier = Modifier
@@ -1713,11 +2019,20 @@ private fun PrivacyPolicyScreen(onBack: () -> Unit) {
             )
             PrivacyParagraph(R.string.privacy_local_checks)
             PrivacyParagraph(R.string.privacy_no_collection)
+            PrivacyParagraph(R.string.privacy_purchase_processing)
             PrivacyParagraph(R.string.privacy_local_device_data)
             PrivacyParagraph(R.string.privacy_no_account)
             PrivacyParagraph(R.string.privacy_no_backend)
-            PrivacyParagraph(R.string.privacy_no_ads_analytics)
+            PrivacyParagraph(R.string.privacy_ads_data)
             PrivacyParagraph(R.string.privacy_no_guarantee)
+            if (showAdPrivacyOptions) {
+                OutlinedButton(
+                    onClick = onShowAdPrivacyOptions,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(R.string.ad_privacy_options))
+                }
+            }
 
             Card(
                 modifier = Modifier
@@ -1964,5 +2279,33 @@ private fun deviceDisplayName(result: EsimCompatibilityResult): String {
             context.bidiIsolate(result.deviceManufacturer),
             context.bidiIsolate(result.deviceModel),
         )
+    }
+}
+
+private fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
+}
+
+private fun sharePdfReport(context: Context, bytes: ByteArray) {
+    runCatching {
+        val directory = File(context.cacheDir, "reports").apply { mkdirs() }
+        val reportFile = File(directory, "esim-check-${System.currentTimeMillis()}.pdf")
+        reportFile.writeBytes(bytes)
+        val uri = FileProvider.getUriForFile(
+            context,
+            "${BuildConfig.APPLICATION_ID}.fileprovider",
+            reportFile,
+        )
+        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "application/pdf"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            clipData = ClipData.newUri(context.contentResolver, "eSIM check report", uri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        context.startActivity(Intent.createChooser(sendIntent, context.getString(R.string.pro_share_pdf)))
+    }.onFailure {
+        Toast.makeText(context, context.getString(R.string.pro_pdf_error), Toast.LENGTH_SHORT).show()
     }
 }

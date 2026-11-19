@@ -121,7 +121,7 @@
     <string name="about_description">購買 eSIM 前，檢查您的 Android 裝置是否回報支援 eSIM。</string>
     <string name="privacy_policy">隱私權政策</string>
     <string name="privacy_local_checks">eSIM Checker 會在您的裝置上本機執行相容性檢查。</string>
-    <string name="privacy_no_collection">本應用程式不會收集、上傳、販售或分享個人資料。</string>
+    <string name="privacy_no_collection">相容性資訊保留在此裝置。購買由 Google Play 處理。只有在您選擇分享時，PDF 才會離開此裝置。</string>
     <string name="privacy_local_device_data">裝置製造商、型號、Android 版本和 eSIM 能力資訊只會在本機處理。</string>
     <string name="privacy_no_account">不需要帳戶。</string>
     <string name="privacy_no_backend">不使用後端伺服器。</string>
@@ -143,4 +143,28 @@
     <string name="instruction_scan_qr">掃描 eSIM 服務提供者提供的 QR code。</string>
     <string name="menu_names_vary">選單名稱會因手機製造商而異。</string>
     <string name="copy_full_report_template">製造商：%1$s\n型號：%2$s\nAndroid 版本：%3$s\neSIM 硬體：%4$s\neSIM 服務：%5$s\nAndroid eSIM API：%6$s\nAndroid 偵測結果：%7$s\n系統設定確認：%8$s</string>
+    <string name="pdf_report_title">eSIM Checker PDF 報告</string>
+    <string name="pdf_report_footer">於此裝置建立 · 第 %1$d 頁</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">儲存並分享本次旅行 eSIM 檢查的 PDF 報告。除非您選擇分享檔案，否則裝置資訊會保留在本機。</string>
+    <string name="pro_buy_price">一次性解鎖 · %1$s</string>
+    <string name="pro_price_loading">正在查詢 Google Play 價格…</string>
+    <string name="pro_unavailable">此一次性購買目前無法使用。</string>
+    <string name="pro_restore">還原購買</string>
+    <string name="pro_owned">Pro 已解鎖</string>
+    <string name="pro_pending">付款處理中。Google Play 確認付款後即可使用 PDF 匯出。</string>
+    <string name="pro_save_pdf">儲存 PDF 報告</string>
+    <string name="pro_share_pdf">分享 PDF 報告</string>
+    <string name="pro_pdf_saved">PDF 報告已儲存。</string>
+    <string name="pro_pdf_error">無法建立 PDF 報告。</string>
+    <string name="privacy_purchase_processing">Pro 購買由 Google Play 處理。應用程式會在本機儲存 Pro 權益狀態，以便透過查詢 Google Play 購買記錄還原權限。</string>
+    <string name="privacy_ads_data">啟用獎勵式廣告後，Google Mobile Ads 可能會收集並分享您的 IP 位址（可能用來估算大致位置）、應用程式互動（例如點擊和影片觀看）、診斷資訊，以及用於廣告、分析和防詐欺的裝置／帳戶識別碼。傳輸中的資料會加密。廣告可能會預先載入；觀看廣告為自願。如應用程式中顯示相關入口，可在「廣告隱私選項」管理同意。</string>
+    <string name="ad_privacy_options">廣告隱私選項</string>
+    <string name="check_esim">檢查 eSIM</string>
+    <string name="check_entry_title">檢查您的 eSIM 相容性</string>
+    <string name="check_entry_description">開始相容性檢查前會播放一則獎勵式廣告；獲得獎勵後才開始檢查。</string>
+    <string name="rewarded_check_disclosure">開始 eSIM 檢查前會播放一則獎勵式廣告。</string>
+    <string name="rewarded_check_loading">正在準備獎勵式廣告。</string>
+    <string name="rewarded_check_not_earned">未獲得廣告獎勵，檢查尚未開始。點選「檢查 eSIM」可重試。</string>
+    <string name="rewarded_check_unavailable">獎勵式廣告暫時無法使用，請稍後重試。</string>
 </resources>

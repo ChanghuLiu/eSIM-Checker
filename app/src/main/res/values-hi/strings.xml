@@ -121,7 +121,7 @@
     <string name="about_description">eSIM खरीदने से पहले जाँचें कि आपका Android डिवाइस eSIM समर्थन की सूचना देता है या नहीं।</string>
     <string name="privacy_policy">गोपनीयता नीति</string>
     <string name="privacy_local_checks">eSIM Checker आपके डिवाइस पर स्थानीय रूप से संगतता जाँच करता है।</string>
-    <string name="privacy_no_collection">ऐप व्यक्तिगत डेटा एकत्र, अपलोड, बेच या साझा नहीं करता।</string>
+    <string name="privacy_no_collection">अनुकूलता की जानकारी इसी डिवाइस पर रहती है। खरीद का प्रबंधन Google Play करता है। PDF तभी डिवाइस से बाहर जाती है जब आप उसे साझा करना चुनते हैं।</string>
     <string name="privacy_local_device_data">डिवाइस निर्माता, मॉडल, Android संस्करण और eSIM क्षमता की जानकारी केवल स्थानीय रूप से प्रोसेस की जाती है।</string>
     <string name="privacy_no_account">किसी खाते की आवश्यकता नहीं है।</string>
     <string name="privacy_no_backend">कोई बैकएंड सर्वर उपयोग नहीं किया जाता।</string>
@@ -143,4 +143,21 @@
     <string name="instruction_scan_qr">अपने eSIM प्रदाता द्वारा दिया गया QR कोड स्कैन करें।</string>
     <string name="menu_names_vary">फ़ोन निर्माता के अनुसार मेनू के नाम अलग हो सकते हैं।</string>
     <string name="copy_full_report_template">निर्माता: %1$s\nमॉडल: %2$s\nAndroid संस्करण: %3$s\neSIM हार्डवेयर: %4$s\neSIM सेवा: %5$s\nAndroid eSIM API: %6$s\nAndroid पहचान: %7$s\nसिस्टम सेटिंग सत्यापन: %8$s</string>
+    <string name="pdf_report_title">eSIM Checker PDF रिपोर्ट</string>
+    <string name="pdf_report_footer">इस डिवाइस पर बनाई गई · पृष्ठ %1$d</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">इस यात्रा eSIM जाँच की PDF रिपोर्ट सहेजें और साझा करें। जब तक आप फ़ाइल साझा करना न चुनें, डिवाइस की जानकारी इसी डिवाइस पर रहती है।</string>
+    <string name="pro_buy_price">एक बार अनलॉक करें · %1$s</string>
+    <string name="pro_price_loading">Google Play की कीमत जाँची जा रही है…</string>
+    <string name="pro_unavailable">यह एक बार की खरीद अभी उपलब्ध नहीं है।</string>
+    <string name="pro_restore">खरीद बहाल करें</string>
+    <string name="pro_owned">Pro अनलॉक है</string>
+    <string name="pro_pending">भुगतान लंबित है। Google Play द्वारा भुगतान की पुष्टि के बाद PDF निर्यात अनलॉक होगा।</string>
+    <string name="pro_save_pdf">PDF रिपोर्ट सहेजें</string>
+    <string name="pro_share_pdf">PDF रिपोर्ट साझा करें</string>
+    <string name="pro_pdf_saved">PDF रिपोर्ट सहेजी गई।</string>
+    <string name="pro_pdf_error">PDF रिपोर्ट नहीं बनाई जा सकी।</string>
+    <string name="privacy_purchase_processing">Pro खरीद का प्रबंधन Google Play करता है। Google Play खरीद की जाँच करके पहुँच बहाल करने के लिए ऐप Pro की स्थिति स्थानीय रूप से सहेजता है।</string>
+    <string name="privacy_ads_data">Rewarded विज्ञापन चालू होने पर Google Mobile Ads आपका IP पता (जिससे सामान्य स्थान का अनुमान लगाया जा सकता है), ऐप इंटरैक्शन जैसे टैप और वीडियो देखना, निदान जानकारी, तथा विज्ञापन, विश्लेषण और धोखाधड़ी रोकने के लिए डिवाइस/खाते के पहचानकर्ता एकत्र और साझा कर सकता है। डेटा भेजते समय एन्क्रिप्ट किया जाता है। विज्ञापन पहले से लोड हो सकते हैं; उन्हें देखना वैकल्पिक है। विकल्प दिखने पर Ad privacy options में सहमति प्राथमिकताएँ बदलें।</string>
+    <string name="ad_privacy_options">विज्ञापन गोपनीयता विकल्प</string>
 </resources>

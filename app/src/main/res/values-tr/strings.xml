@@ -121,7 +121,7 @@
     <string name="about_description">Bir eSIM satın almadan önce Android cihazınızın eSIM desteği bildirip bildirmediğini kontrol edin.</string>
     <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="privacy_local_checks">eSIM Denetleyici, uyumluluk kontrollerini cihazınızda yerel olarak gerçekleştirir.</string>
-    <string name="privacy_no_collection">Uygulama kişisel verileri toplamaz, yüklemez, satmaz veya paylaşmaz.</string>
+    <string name="privacy_no_collection">Uyumluluk bilgileri bu cihazda kalır. Satın alımları Google Play işler. PDF yalnızca paylaşmayı seçerseniz cihazdan çıkar.</string>
     <string name="privacy_local_device_data">Cihaz üreticisi, modeli, Android sürümü ve eSIM özelliği bilgileri yalnızca yerel olarak işlenir.</string>
     <string name="privacy_no_account">Hesap gerekmez.</string>
     <string name="privacy_no_backend">Arka uç sunucusu kullanılmaz.</string>
@@ -143,4 +143,21 @@
     <string name="instruction_scan_qr">eSIM sağlayıcınızın verdiği QR kodunu tarayın.</string>
     <string name="menu_names_vary">Menü adları telefon üreticisine göre değişir.</string>
     <string name="copy_full_report_template">Üretici: %1$s\nModel: %2$s\nAndroid sürümü: %3$s\neSIM Donanımı: %4$s\neSIM Hizmeti: %5$s\nAndroid eSIM API: %6$s\nAndroid algılaması: %7$s\nSistem ayarları doğrulaması: %8$s</string>
+    <string name="pdf_report_title">eSIM Checker PDF raporu</string>
+    <string name="pdf_report_footer">Bu cihazda oluşturuldu · Sayfa %1$d</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">Bu seyahat eSIM kontrolünün PDF raporunu kaydedip paylaşın. Dosyayı paylaşmayı seçmediğiniz sürece cihaz bilgileri bu cihazda kalır.</string>
+    <string name="pro_buy_price">Tek seferlik kilit açma · %1$s</string>
+    <string name="pro_price_loading">Google Play fiyatı kontrol ediliyor…</string>
+    <string name="pro_unavailable">Bu tek seferlik satın alma şu anda kullanılamıyor.</string>
+    <string name="pro_restore">Satın alımı geri yükle</string>
+    <string name="pro_owned">Pro kilidi açıldı</string>
+    <string name="pro_pending">Ödeme beklemede. PDF dışa aktarma, Google Play ödemeyi onayladıktan sonra açılır.</string>
+    <string name="pro_save_pdf">PDF raporunu kaydet</string>
+    <string name="pro_share_pdf">PDF raporunu paylaş</string>
+    <string name="pro_pdf_saved">PDF raporu kaydedildi.</string>
+    <string name="pro_pdf_error">PDF raporu oluşturulamadı.</string>
+    <string name="privacy_purchase_processing">Pro satın alımlarını Google Play işler. Uygulama, Google Play satın alımlarını kontrol ederek erişimi geri yüklemek için Pro durumunu yerel olarak saklar.</string>
+    <string name="privacy_ads_data">Ödüllü reklamlar etkinleştirildiğinde Google Mobile Ads; genel konumu tahmin etmek için kullanılabilen IP adresinizi, dokunma ve video izleme gibi uygulama etkileşimlerini, tanılama bilgilerini ve reklam, analiz ve dolandırıcılığı önleme amaçlarıyla cihaz/hesap tanımlayıcılarını toplayıp paylaşabilir. Veriler aktarım sırasında şifrelenir. Reklamlar önceden yüklenebilir; izlemek isteğe bağlıdır. Gösterildiğinde onay tercihlerinizi Reklam gizliliği seçeneklerinden yönetin.</string>
+    <string name="ad_privacy_options">Reklam gizliliği seçenekleri</string>
 </resources>

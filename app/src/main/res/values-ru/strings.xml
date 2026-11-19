@@ -121,7 +121,7 @@
     <string name="about_description">Проверьте, сообщает ли ваше Android-устройство о поддержке eSIM, прежде чем покупать eSIM.</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="privacy_local_checks">eSIM Checker выполняет проверки совместимости локально на устройстве.</string>
-    <string name="privacy_no_collection">Приложение не собирает, не загружает, не продаёт и не передаёт персональные данные.</string>
+    <string name="privacy_no_collection">Данные о совместимости остаются на устройстве. Покупки обрабатывает Google Play. PDF покидает устройство только если вы решите поделиться файлом.</string>
     <string name="privacy_local_device_data">Данные о производителе и модели устройства, версии Android и возможностях eSIM обрабатываются только локально.</string>
     <string name="privacy_no_account">Учётная запись не требуется.</string>
     <string name="privacy_no_backend">Серверная часть не используется.</string>
@@ -143,4 +143,21 @@
     <string name="instruction_scan_qr">Отсканируйте QR-код, предоставленный поставщиком eSIM.</string>
     <string name="menu_names_vary">Названия меню зависят от производителя телефона.</string>
     <string name="copy_full_report_template">Производитель: %1$s\nМодель: %2$s\nВерсия Android: %3$s\nОборудование eSIM: %4$s\nСлужба eSIM: %5$s\nAPI eSIM Android: %6$s\nОбнаружение Android: %7$s\nПроверка в системных настройках: %8$s</string>
+    <string name="pdf_report_title">PDF-отчёт eSIM Checker</string>
+    <string name="pdf_report_footer">Создано на этом устройстве · Страница %1$d</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">Сохраняйте и отправляйте PDF-отчёт этой проверки туристической eSIM. Данные устройства остаются на нём, если вы не решите поделиться файлом.</string>
+    <string name="pro_buy_price">Разблокировать один раз · %1$s</string>
+    <string name="pro_price_loading">Проверяем цену в Google Play…</string>
+    <string name="pro_unavailable">Эта разовая покупка сейчас недоступна.</string>
+    <string name="pro_restore">Восстановить покупку</string>
+    <string name="pro_owned">Pro разблокирован</string>
+    <string name="pro_pending">Платёж ожидает подтверждения. Экспорт PDF станет доступен после подтверждения Google Play.</string>
+    <string name="pro_save_pdf">Сохранить PDF-отчёт</string>
+    <string name="pro_share_pdf">Поделиться PDF-отчётом</string>
+    <string name="pro_pdf_saved">PDF-отчёт сохранён.</string>
+    <string name="pro_pdf_error">Не удалось создать PDF-отчёт.</string>
+    <string name="privacy_purchase_processing">Покупки Pro обрабатывает Google Play. Приложение локально сохраняет статус Pro, чтобы восстановить доступ, проверив покупки Google Play.</string>
+    <string name="privacy_ads_data">Когда реклама с вознаграждением включена, Google Mobile Ads может собирать и передавать ваш IP-адрес (он может использоваться для определения примерного местоположения), данные о взаимодействиях с приложением, например нажатиях и просмотрах видео, диагностическую информацию и идентификаторы устройства/аккаунта для рекламы, аналитики и предотвращения мошенничества. Данные шифруются при передаче. Реклама может загружаться заранее; просмотр необязателен. Если параметр доступен, управляйте согласием в разделе «Настройки конфиденциальности рекламы».</string>
+    <string name="ad_privacy_options">Настройки конфиденциальности рекламы</string>
 </resources>

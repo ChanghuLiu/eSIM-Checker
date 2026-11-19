@@ -121,7 +121,7 @@
     <string name="about_description">Periksa apakah perangkat Android Anda melaporkan dukungan eSIM sebelum membeli eSIM.</string>
     <string name="privacy_policy">Kebijakan Privasi</string>
     <string name="privacy_local_checks">Pemeriksa eSIM melakukan pemeriksaan kompatibilitas secara lokal di perangkat Anda.</string>
-    <string name="privacy_no_collection">Aplikasi tidak mengumpulkan, mengunggah, menjual, atau membagikan data pribadi.</string>
+    <string name="privacy_no_collection">Informasi kompatibilitas tetap di perangkat ini. Google Play memproses pembelian. PDF hanya keluar dari perangkat ini jika Anda memilih untuk membagikannya.</string>
     <string name="privacy_local_device_data">Informasi produsen, model, versi Android, dan kemampuan eSIM perangkat hanya diproses secara lokal.</string>
     <string name="privacy_no_account">Tidak diperlukan akun.</string>
     <string name="privacy_no_backend">Tidak ada server backend yang digunakan.</string>
@@ -143,4 +143,21 @@
     <string name="instruction_scan_qr">Pindai kode QR yang diberikan oleh penyedia eSIM Anda.</string>
     <string name="menu_names_vary">Nama menu berbeda-beda menurut produsen ponsel.</string>
     <string name="copy_full_report_template">Produsen: %1$s\nModel: %2$s\nVersi Android: %3$s\nPerangkat Keras eSIM: %4$s\nLayanan eSIM: %5$s\nAPI eSIM Android: %6$s\nDeteksi Android: %7$s\nVerifikasi setelan sistem: %8$s</string>
+    <string name="pdf_report_title">Laporan PDF eSIM Checker</string>
+    <string name="pdf_report_footer">Dibuat di perangkat ini · Halaman %1$d</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">Simpan dan bagikan laporan PDF pemeriksaan eSIM perjalanan ini. Informasi perangkat tetap di perangkat ini kecuali Anda memilih untuk membagikan file.</string>
+    <string name="pro_buy_price">Buka sekali · %1$s</string>
+    <string name="pro_price_loading">Memeriksa harga Google Play…</string>
+    <string name="pro_unavailable">Pembelian satu kali ini belum tersedia.</string>
+    <string name="pro_restore">Pulihkan pembelian</string>
+    <string name="pro_owned">Pro terbuka</string>
+    <string name="pro_pending">Pembayaran tertunda. Ekspor PDF akan terbuka setelah Google Play mengonfirmasi pembayaran.</string>
+    <string name="pro_save_pdf">Simpan laporan PDF</string>
+    <string name="pro_share_pdf">Bagikan laporan PDF</string>
+    <string name="pro_pdf_saved">Laporan PDF disimpan.</string>
+    <string name="pro_pdf_error">Laporan PDF tidak dapat dibuat.</string>
+    <string name="privacy_purchase_processing">Google Play memproses pembelian Pro. Aplikasi menyimpan status Pro secara lokal agar akses dapat dipulihkan dengan memeriksa pembelian Google Play.</string>
+    <string name="privacy_ads_data">Jika iklan Rewarded diaktifkan, Google Mobile Ads dapat mengumpulkan dan membagikan alamat IP Anda (yang dapat memperkirakan lokasi umum), interaksi aplikasi seperti ketukan dan penayangan video, informasi diagnostik, serta pengenal perangkat/akun untuk iklan, analitik, dan pencegahan penipuan. Data dienkripsi saat dikirim. Iklan dapat dimuat lebih dahulu; menontonnya bersifat opsional. Jika tersedia, gunakan Opsi privasi iklan untuk mengelola persetujuan.</string>
+    <string name="ad_privacy_options">Opsi privasi iklan</string>
 </resources>

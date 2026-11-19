@@ -12,6 +12,14 @@ class EsimResultClassifierTest {
         assertEquals(false, signals.euiccManagerAvailable)
         assertEquals(false, signals.euiccEnabled)
         assertEquals(false, signals.androidEsimApiAvailable)
+
+        val result = EsimResultClassifier.classify(
+            hasEuiccFeature = signals.hasEuiccFeature,
+            euiccManagerAvailable = signals.euiccManagerAvailable,
+            euiccEnabled = signals.euiccEnabled,
+            androidEsimApiAvailable = signals.androidEsimApiAvailable,
+        )
+        assertEquals(EsimResultStatus.PARTIALLY_READY, result)
     }
 
     @Test
