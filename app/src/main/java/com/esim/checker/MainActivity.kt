@@ -17,11 +17,9 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         val checker = EsimCompatibilityChecker(applicationContext)
-        val initialResult = checker.check()
-
         setContent {
             var compatibilityResult by remember {
-                mutableStateOf(intent.applyDebugEsimSimulation(initialResult))
+                mutableStateOf<com.esim.checker.EsimCompatibilityResult?>(null)
             }
 
             ESIMCheckerTheme {

@@ -121,7 +121,7 @@
     <string name="about_description">在购买 eSIM 前，检查您的 Android 设备是否报告支持 eSIM。</string>
     <string name="privacy_policy">隐私政策</string>
     <string name="privacy_local_checks">eSIM 检测器会在您的设备上本地执行兼容性检测。</string>
-    <string name="privacy_no_collection">本应用不会收集、上传、出售或共享个人数据。</string>
+    <string name="privacy_no_collection">兼容性信息保留在本设备。购买由 Google Play 处理。只有在你选择分享时，PDF 才会离开本设备。</string>
     <string name="privacy_local_device_data">设备制造商、型号、Android 版本和 eSIM 功能信息仅在本地处理。</string>
     <string name="privacy_no_account">无需账户。</string>
     <string name="privacy_no_backend">不使用后端服务器。</string>
@@ -143,4 +143,28 @@
     <string name="instruction_scan_qr">扫描 eSIM 提供商提供的二维码。</string>
     <string name="menu_names_vary">菜单名称因手机制造商而异。</string>
     <string name="copy_full_report_template">制造商：%1$s\n型号：%2$s\nAndroid 版本：%3$s\neSIM 硬件：%4$s\neSIM 服务：%5$s\nAndroid eSIM API：%6$s\nAndroid 检测结果：%7$s\n系统设置验证：%8$s</string>
+    <string name="pdf_report_title">eSIM Checker PDF 报告</string>
+    <string name="pdf_report_footer">在本设备生成 · 第 %1$d 页</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">保存并分享本次旅行 eSIM 检查的 PDF 报告。除非你选择分享文件，否则设备信息会保留在本机。</string>
+    <string name="pro_buy_price">一次性解锁 · %1$s</string>
+    <string name="pro_price_loading">正在查询 Google Play 价格…</string>
+    <string name="pro_unavailable">此一次性购买目前不可用。</string>
+    <string name="pro_restore">恢复购买</string>
+    <string name="pro_owned">Pro 已解锁</string>
+    <string name="pro_pending">付款处理中。Google Play 确认付款后即可使用 PDF 导出。</string>
+    <string name="pro_save_pdf">保存 PDF 报告</string>
+    <string name="pro_share_pdf">分享 PDF 报告</string>
+    <string name="pro_pdf_saved">PDF 报告已保存。</string>
+    <string name="pro_pdf_error">无法生成 PDF 报告。</string>
+    <string name="privacy_purchase_processing">Pro 购买由 Google Play 处理。应用会在本机保存 Pro 权益状态，以便通过查询 Google Play 购买记录恢复权限。</string>
+    <string name="privacy_ads_data">启用激励广告后，Google Mobile Ads 可能会收集并共享您的 IP 地址（可能用于估算大致位置）、应用互动（如点击和视频观看）、诊断信息，以及用于广告、分析和防欺诈的设备/账号标识符。传输中的数据会加密。广告可能会预加载；观看广告是自愿的。如应用中显示相关入口，可在“广告隐私选项”中管理同意。</string>
+    <string name="ad_privacy_options">广告隐私选项</string>
+    <string name="watch_ad_and_check_esim">观看广告并检查 eSIM</string>
+    <string name="check_without_ad">不看广告，直接检查</string>
+    <string name="check_entry_title">检查您的 eSIM 兼容性</string>
+    <string name="check_entry_description">选择如何开始 eSIM 兼容性检查。</string>
+    <string name="rewarded_check_loading">正在准备广告。您也可以随时不看广告直接检查。</string>
+    <string name="rewarded_check_not_earned">未获得广告奖励，检查尚未开始。您可以重试或不看广告直接检查。</string>
+    <string name="rewarded_check_unavailable">激励广告暂不可用，您可以不看广告直接检查。</string>
 </resources>

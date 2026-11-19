@@ -121,7 +121,7 @@
     <string name="about_description">eSIM を購入する前に、Android 端末が eSIM 対応を報告しているか確認します。</string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="privacy_local_checks">eSIM Checker は端末上で対応状況を確認します。</string>
-    <string name="privacy_no_collection">個人データを収集、アップロード、販売、共有することはありません。</string>
+    <string name="privacy_no_collection">互換性情報はこの端末内に保存されます。購入処理は Google Play が行います。PDFは共有を選択した場合のみ端末外へ送信されます。</string>
     <string name="privacy_local_device_data">メーカー、モデル、Android バージョン、eSIM 機能の情報は端末内でのみ処理されます。</string>
     <string name="privacy_no_account">アカウントは必要ありません。</string>
     <string name="privacy_no_backend">バックエンドサーバーは使用しません。</string>
@@ -143,4 +143,21 @@
     <string name="instruction_scan_qr">eSIM サービス提供元から受け取った QR コードをスキャンします。</string>
     <string name="menu_names_vary">メニュー名は端末メーカーによって異なります。</string>
     <string name="copy_full_report_template">メーカー：%1$s\\nモデル：%2$s\\nAndroid バージョン：%3$s\\neSIM ハードウェア：%4$s\\neSIM サービス：%5$s\\nAndroid eSIM API：%6$s\\nAndroid の検出結果：%7$s\\nシステム設定での確認：%8$s</string>
+    <string name="pdf_report_title">eSIM Checker PDFレポート</string>
+    <string name="pdf_report_footer">この端末で作成 · ページ %1$d</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">旅行用eSIMチェックのPDFレポートを保存・共有できます。共有を選ばない限り、端末情報はこの端末内に保存されます。</string>
+    <string name="pro_buy_price">一度だけロック解除 · %1$s</string>
+    <string name="pro_price_loading">Google Play の価格を確認中…</string>
+    <string name="pro_unavailable">現在、この買い切り商品は利用できません。</string>
+    <string name="pro_restore">購入を復元</string>
+    <string name="pro_owned">Pro のロック解除済み</string>
+    <string name="pro_pending">お支払いは保留中です。Google Play で確認されるとPDF出力が利用できます。</string>
+    <string name="pro_save_pdf">PDFレポートを保存</string>
+    <string name="pro_share_pdf">PDFレポートを共有</string>
+    <string name="pro_pdf_saved">PDFレポートを保存しました。</string>
+    <string name="pro_pdf_error">PDFレポートを作成できませんでした。</string>
+    <string name="privacy_purchase_processing">Proの購入処理は Google Play が行います。Google Playの購入情報を確認してアクセスを復元できるよう、アプリはProの状態を端末内に保存します。</string>
+    <string name="privacy_ads_data">Rewarded 広告が有効な場合、Google Mobile Ads は、IP アドレス（おおよその位置の推定に使われることがあります）、タップや動画視聴などのアプリ操作、診断情報、広告・分析・不正防止のための端末またはアカウント識別子を収集・共有することがあります。送信中のデータは暗号化されます。広告は事前に読み込まれる場合がありますが、視聴は任意です。表示される場合は「広告のプライバシー設定」で同意を管理できます。</string>
+    <string name="ad_privacy_options">広告のプライバシー設定</string>
 </resources>

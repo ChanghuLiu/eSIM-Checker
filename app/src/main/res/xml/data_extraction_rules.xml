@@ -7,6 +7,9 @@
         <exclude
             domain="sharedpref"
             path="travel_esim_purchase_check.xml" />
+        <exclude
+            domain="sharedpref"
+            path="esim_checker_pro_purchase.xml" />
     </cloud-backup>
     <device-transfer>
         <exclude
@@ -15,5 +18,8 @@
         <exclude
             domain="sharedpref"
             path="travel_esim_purchase_check.xml" />
+        <exclude
+            domain="sharedpref"
+            path="esim_checker_pro_purchase.xml" />
     </device-transfer>
 </data-extraction-rules>

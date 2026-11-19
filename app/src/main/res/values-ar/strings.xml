@@ -121,7 +121,7 @@
     <string name="about_description">تحقق مما إذا كان جهاز Android يفيد بدعم eSIM قبل شراء شريحة eSIM.</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
     <string name="privacy_local_checks">يجري فاحص eSIM عمليات التحقق من التوافق محليًا على جهازك.</string>
-    <string name="privacy_no_collection">لا يجمع التطبيق البيانات الشخصية أو يحمّلها أو يبيعها أو يشاركها.</string>
+    <string name="privacy_no_collection">تبقى معلومات التوافق على هذا الجهاز. يتولى Google Play معالجة عمليات الشراء. لا يغادر ملف PDF هذا الجهاز إلا إذا اخترت مشاركته.</string>
     <string name="privacy_local_device_data">تتم معالجة معلومات الشركة المصنّعة للجهاز والطراز وإصدار Android وإمكانات eSIM محليًا فقط.</string>
     <string name="privacy_no_account">لا يلزم وجود حساب.</string>
     <string name="privacy_no_backend">لا يتم استخدام خادم خلفي.</string>
@@ -143,4 +143,21 @@
     <string name="instruction_scan_qr">امسح رمز QR الذي قدمه مزود eSIM.</string>
     <string name="menu_names_vary">تختلف أسماء القوائم حسب الشركة المصنّعة للهاتف.</string>
     <string name="copy_full_report_template">الشركة المصنّعة: %1$s\nالطراز: %2$s\nإصدار Android: %3$s\nمكونات eSIM: %4$s\nخدمة eSIM: %5$s\nواجهة eSIM في Android: %6$s\nاكتشاف Android: %7$s\nالتحقق في إعدادات النظام: %8$s</string>
+    <string name="pdf_report_title">تقرير eSIM Checker بصيغة PDF</string>
+    <string name="pdf_report_footer">أُنشئ على هذا الجهاز · الصفحة %1$d</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">احفظ تقرير فحص eSIM للسفر بصيغة PDF وشاركه. تبقى معلومات الجهاز على هذا الجهاز ما لم تختر مشاركة الملف.</string>
+    <string name="pro_buy_price">فتح لمرة واحدة · %1$s</string>
+    <string name="pro_price_loading">جارٍ التحقق من السعر في Google Play…</string>
+    <string name="pro_unavailable">هذا الشراء لمرة واحدة غير متاح الآن.</string>
+    <string name="pro_restore">استعادة الشراء</string>
+    <string name="pro_owned">تم فتح Pro</string>
+    <string name="pro_pending">الدفع قيد الانتظار. سيتاح تصدير PDF بعد تأكيد Google Play للدفع.</string>
+    <string name="pro_save_pdf">حفظ تقرير PDF</string>
+    <string name="pro_share_pdf">مشاركة تقرير PDF</string>
+    <string name="pro_pdf_saved">تم حفظ تقرير PDF.</string>
+    <string name="pro_pdf_error">تعذر إنشاء تقرير PDF.</string>
+    <string name="privacy_purchase_processing">يعالج Google Play مشتريات Pro. يخزن التطبيق حالة الاستحقاق محليًا لاستعادة الوصول بالتحقق من مشتريات Google Play.</string>
+    <string name="privacy_ads_data">عند تفعيل الإعلانات بمكافأة، قد تجمع Google Mobile Ads عنوان IP الخاص بك ومشاركته (وقد يُستخدم لتقدير الموقع العام)، وتفاعلات التطبيق مثل النقرات ومشاهدات الفيديو، ومعلومات التشخيص، ومعرّفات الجهاز أو الحساب لأغراض الإعلان والتحليلات ومنع الاحتيال. تُشفّر البيانات أثناء النقل. قد يتم تحميل الإعلانات مسبقًا؛ ومشاهدة الإعلان اختيارية. عند ظهور الخيار، استخدم خيارات خصوصية الإعلانات لإدارة الموافقة.</string>
+    <string name="ad_privacy_options">خيارات خصوصية الإعلانات</string>
 </resources>

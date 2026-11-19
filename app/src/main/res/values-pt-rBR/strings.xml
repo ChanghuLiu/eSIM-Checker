@@ -121,7 +121,7 @@
     <string name="about_description">Verifique se o seu dispositivo Android informa suporte a eSIM antes de comprar um eSIM.</string>
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="privacy_local_checks">O Verificador de eSIM realiza verificações de compatibilidade localmente no seu dispositivo.</string>
-    <string name="privacy_no_collection">O aplicativo não coleta, envia, vende nem compartilha dados pessoais.</string>
+    <string name="privacy_no_collection">As informações de compatibilidade ficam neste dispositivo. O Google Play processa as compras. O PDF só sai do dispositivo se você escolher compartilhá-lo.</string>
     <string name="privacy_local_device_data">O fabricante, o modelo, a versão do Android e as informações de capacidade eSIM do dispositivo são processados apenas localmente.</string>
     <string name="privacy_no_account">Nenhuma conta é necessária.</string>
     <string name="privacy_no_backend">Nenhum servidor backend é usado.</string>
@@ -143,4 +143,21 @@
     <string name="instruction_scan_qr">Leia o código QR fornecido pelo seu provedor de eSIM.</string>
     <string name="menu_names_vary">Os nomes dos menus variam conforme o fabricante do telefone.</string>
     <string name="copy_full_report_template">Fabricante: %1$s\nModelo: %2$s\nVersão do Android: %3$s\nHardware eSIM: %4$s\nServiço eSIM: %5$s\nAPI eSIM do Android: %6$s\nDetecção do Android: %7$s\nVerificação nas configurações do sistema: %8$s</string>
+    <string name="pdf_report_title">Relatório PDF do eSIM Checker</string>
+    <string name="pdf_report_footer">Gerado neste dispositivo · Página %1$d</string>
+    <string name="pro_unlock_title">eSIM Checker Pro</string>
+    <string name="pro_unlock_description">Salve e compartilhe um relatório PDF desta verificação de eSIM de viagem. As informações do dispositivo ficam nele, a menos que você escolha compartilhar o arquivo.</string>
+    <string name="pro_buy_price">Desbloqueio único · %1$s</string>
+    <string name="pro_price_loading">Verificando preço no Google Play…</string>
+    <string name="pro_unavailable">Esta compra única não está disponível no momento.</string>
+    <string name="pro_restore">Restaurar compra</string>
+    <string name="pro_owned">Pro desbloqueado</string>
+    <string name="pro_pending">Pagamento pendente. A exportação PDF será liberada após a confirmação do Google Play.</string>
+    <string name="pro_save_pdf">Salvar relatório PDF</string>
+    <string name="pro_share_pdf">Compartilhar relatório PDF</string>
+    <string name="pro_pdf_saved">Relatório PDF salvo.</string>
+    <string name="pro_pdf_error">Não foi possível criar o relatório PDF.</string>
+    <string name="privacy_purchase_processing">O Google Play processa as compras Pro. O app salva o estado Pro localmente para restaurar o acesso consultando as compras do Google Play.</string>
+    <string name="privacy_ads_data">Quando os anúncios premiados estão ativados, o Google Mobile Ads pode coletar e compartilhar seu endereço IP (que pode estimar a localização geral), interações no app, como toques e visualizações de vídeo, informações de diagnóstico e identificadores do dispositivo/conta para publicidade, análise e prevenção a fraudes. Os dados são criptografados durante a transmissão. Os anúncios podem ser pré-carregados; assisti-los é opcional. Quando disponível, use Opções de privacidade de anúncios para gerenciar o consentimento.</string>
+    <string name="ad_privacy_options">Opções de privacidade de anúncios</string>
 </resources>

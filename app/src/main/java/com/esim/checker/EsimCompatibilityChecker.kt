@@ -30,7 +30,11 @@ object EsimResultClassifier {
         hasEuiccFeature: Boolean,
         euiccManagerAvailable: Boolean,
         euiccEnabled: Boolean,
+        androidEsimApiAvailable: Boolean = true,
     ): EsimResultStatus = when {
+        // On API 27, Android exposes none of the signals below. Missing signals
+        // must remain uncertain instead of being interpreted as missing hardware.
+        !androidEsimApiAvailable -> EsimResultStatus.PARTIALLY_READY
         !hasEuiccFeature -> EsimResultStatus.NOT_READY
         euiccManagerAvailable && euiccEnabled -> EsimResultStatus.READY
         else -> EsimResultStatus.PARTIALLY_READY
@@ -86,6 +90,7 @@ class EsimCompatibilityChecker(private val context: Context) {
                 hasEuiccFeature = signals.hasEuiccFeature,
                 euiccManagerAvailable = signals.euiccManagerAvailable,
                 euiccEnabled = signals.euiccEnabled,
+                androidEsimApiAvailable = signals.androidEsimApiAvailable,
             ),
         )
     }
