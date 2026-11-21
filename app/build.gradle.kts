@@ -4,6 +4,11 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services") version "4.6.0" apply false
+}
+
+if (file("google-services.json").isFile) {
+    pluginManager.apply("com.google.gms.google-services")
 }
 
 val releaseSigningPropertiesFile = providers
@@ -97,6 +102,8 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:35.2.0"))
+    implementation("com.google.firebase:firebase-analytics")
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

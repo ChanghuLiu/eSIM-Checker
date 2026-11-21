@@ -67,6 +67,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.esim.checker.AppAnalytics
 import com.esim.checker.LocalPdfReport
 import com.esim.checker.ProPurchaseManager
 import com.esim.checker.ProPurchaseState
@@ -160,21 +161,26 @@ fun EsimCheckerApp(
         context.findActivity()?.let(rewardedAds::start)
     }
     val watchAdAndCheck = {
+        AppAnalytics.log(context, "rewarded_check_requested")
         val activity = context.findActivity()
         if (activity == null) {
             adCheckMessage = R.string.rewarded_check_unavailable
         } else {
             adCheckMessage = null
+            AppAnalytics.log(context, "rewarded_check_ad_started")
             rewardedAds.showRewarded(
                 activity = activity,
                 onEarned = {
+                    AppAnalytics.log(context, "rewarded_check_earned")
                     adCheckMessage = null
                     onCheckAgain()
                 },
                 onClosedWithoutReward = {
+                    AppAnalytics.log(context, "rewarded_check_closed_without_reward")
                     adCheckMessage = R.string.rewarded_check_not_earned
                 },
                 onUnavailable = {
+                    AppAnalytics.log(context, "rewarded_check_unavailable")
                     adCheckMessage = R.string.rewarded_check_unavailable
                 },
             )
@@ -262,6 +268,7 @@ fun EsimCheckerApp(
         val launchResult = EsimSettingsNavigator.open(context) { intent ->
             settingsLauncher.launch(intent)
         }
+        if (launchResult.launched) AppAnalytics.log(context, "esim_settings_opened")
         if (!launchResult.launched) {
             Toast.makeText(
                 context,
@@ -269,6 +276,15 @@ fun EsimCheckerApp(
                 Toast.LENGTH_SHORT,
             ).show()
         }
+    }
+
+    LaunchedEffect(currentPage, result == null) {
+        val screen = when {
+            currentPage == AppPage.MAIN && result == null -> "check_entry"
+            currentPage == AppPage.MAIN -> "compatibility_result"
+            else -> currentPage.name.lowercase()
+        }
+        AppAnalytics.log(context, "app_screen_view", "screen", screen)
     }
 
     if (currentPage != AppPage.MAIN) {
