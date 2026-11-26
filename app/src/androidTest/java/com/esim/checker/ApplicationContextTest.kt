@@ -12,6 +12,8 @@ class ApplicationContextTest {
     fun applicationIdIsCorrect() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
 
-        assertEquals("com.esim.checker", appContext.packageName)
+        // Debug runs use an isolated `.adtest` applicationId suffix; release
+        // retains the Play package. Assert the manifest and generated config agree.
+        assertEquals(BuildConfig.APPLICATION_ID, appContext.packageName)
     }
 }
