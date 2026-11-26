@@ -2,12 +2,15 @@ package com.esim.checker
 
 import android.content.ClipboardManager
 import android.os.Build
+import androidx.activity.compose.setContent
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.esim.checker.ui.EsimCheckerApp
+import com.esim.checker.ui.theme.ESIMCheckerTheme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -23,6 +26,26 @@ class ClipboardActionsTest {
     @Test
     fun clipboardActionsContainExpectedValuesWithoutSensitiveOrDebugData() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val result = EsimCompatibilityResult(
+            deviceManufacturer = Build.MANUFACTURER,
+            deviceModel = Build.MODEL,
+            deviceCodename = Build.DEVICE,
+            androidVersion = Build.VERSION.RELEASE,
+            hasEuiccFeature = false,
+            euiccManagerAvailable = false,
+            euiccEnabled = false,
+            androidEsimApiAvailable = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P,
+            resultStatus = EsimResultStatus.NOT_READY,
+        )
+        composeRule.activity.setContent {
+            ESIMCheckerTheme {
+                EsimCheckerApp(
+                    result = result,
+                    onCheckAgain = {},
+                )
+            }
+        }
+        composeRule.waitForIdle()
 
         composeRule.onNodeWithText(context.getString(R.string.copy_full_report))
             .performScrollTo()
@@ -50,9 +73,23 @@ class ClipboardActionsTest {
         assertTrue(purchaseReport.contains(Build.MODEL))
         assertTrue(purchaseReport.contains(Build.DEVICE))
         assertTrue(purchaseReport.contains(Build.VERSION.RELEASE))
-        assertTrue(purchaseReport.contains("\n\nAutomatic checks:\n"))
-        assertTrue(purchaseReport.contains("\n\nManual checks:\n"))
-        assertTrue(purchaseReport.contains("\n\nOverall:\n"))
+        val verification = ManualVerificationStore(context).readResult()
+        val purchaseStore = TravelPurchaseCheckStore(context)
+        val carrierUnlocked = purchaseStore.readCarrierUnlocked()
+        val providerCompatibility = purchaseStore.readProviderCompatibility()
+        val expectedPurchaseReport = result.toPurchaseCheckText(
+            context = context,
+            settingsVerification = verification,
+            carrierUnlocked = carrierUnlocked,
+            providerCompatibility = providerCompatibility,
+            outcome = TravelPurchaseClassifier.classify(
+                androidDetection = result.resultStatus,
+                settingsVerification = verification,
+                carrierUnlocked = carrierUnlocked,
+                providerCompatibility = providerCompatibility,
+            ),
+        )
+        assertEquals(expectedPurchaseReport, purchaseReport)
         assertSafeReport(purchaseReport)
     }
 

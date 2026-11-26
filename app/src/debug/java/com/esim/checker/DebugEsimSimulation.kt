@@ -44,6 +44,17 @@ internal fun Intent.applyDebugEsimSimulation(
 }
 
 private const val DEBUG_ESIM_RESULT_EXTRA = "com.esim.checker.debug.ESIM_RESULT"
+private const val DEBUG_START_WITH_RESULT_EXTRA = "com.esim.checker.debug.START_WITH_RESULT"
+
+/** Debug-only hook for automated tests of result-screen copy and actions. */
+internal fun Intent.initialDebugEsimResult(
+    realResult: EsimCompatibilityResult,
+): EsimCompatibilityResult? =
+    if (getBooleanExtra(DEBUG_START_WITH_RESULT_EXTRA, false)) {
+        applyDebugEsimSimulation(realResult)
+    } else {
+        null
+    }
 
 /** Debug-only switch for exercising the wireless-settings fallback on an emulator. */
 internal fun Context.forceDebugWirelessSettings(): Boolean =

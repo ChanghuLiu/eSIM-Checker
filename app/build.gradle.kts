@@ -39,8 +39,8 @@ android {
         applicationId = "com.esim.checker"
         minSdk = 27
         targetSdk = 36
-        versionCode = 17
-        versionName = "0.9.8"
+        versionCode = 18
+        versionName = "0.9.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -82,7 +82,8 @@ android {
                 signingConfig = signingConfigs.getByName("release")
             }
             optimization {
-                enable = false
+                // Enable the AGP 9.3 R8 pipeline, including code and resource shrinking.
+                enable = true
             }
         }
     }
@@ -103,11 +104,19 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
+    // Compose UI Graphics 1.10.4 resolves graphics-path 1.0.1, whose shipped
+    // native library predates current 16 KB page-size guidance. Pin the
+    // compatible AndroidX release directly and verify every ABI in the AAB.
+    implementation("androidx.graphics:graphics-path:1.1.0")
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.google.play.billing)
     implementation(libs.google.mobile.ads)
     implementation(libs.google.ump)
+    // Google Mobile Ads 25.5.0 pulls WorkManager 2.7.0 / Room 2.2.5. Those
+    // 2021-era runtime components fail in the minified release startup path;
+    // align to current stable WorkManager instead of keeping the app unshrunk.
+    implementation("androidx.work:work-runtime:2.12.0")
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     testImplementation(libs.junit)

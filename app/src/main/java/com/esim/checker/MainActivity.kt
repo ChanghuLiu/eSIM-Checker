@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val checker = EsimCompatibilityChecker(applicationContext)
         setContent {
             var compatibilityResult by remember {
-                mutableStateOf<com.esim.checker.EsimCompatibilityResult?>(null)
+                mutableStateOf(intent.initialDebugEsimResult(checker.check()))
             }
 
             ESIMCheckerTheme {
